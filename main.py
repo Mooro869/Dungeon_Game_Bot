@@ -4,13 +4,13 @@ from random import randint
 from time import sleep
 
 import executor
-from aiogram import Bot, Dispatcher, types
+from aiogram import Bot, Dispatcher, types  #При импорте executor здесь выводит ошиькуе
 
 import config
 import keyboard
 
 bot = Bot(token=config.TOKEN_API)
-dp = Dispatcher(bot)
+dp = Dispatcher(bot) # ещё одна ошибка здесь 
 
 
 @dp.message_handler()
