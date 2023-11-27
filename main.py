@@ -1,5 +1,4 @@
 import logging
-import time
 from random import randint
 from time import sleep
 
@@ -17,12 +16,13 @@ dp = Dispatcher(bot=bot)
 @dp.message_handler(commands=['start'])
 async def start_command(message: types.Message):
     await message.answer(text=config.START_TEXT)
-    await message.delete()
+    # await message.delete()
 
 
 @dp.message_handler(commands=['help'])
 async def help_command(message: types.Message):
-    await message.reply(text=config.HELP_COMMANDS)
+    await message.answer(text=config.HELP_COMMANDS)
+    # await message.delete()
 
 
 if __name__ == '__main__':
