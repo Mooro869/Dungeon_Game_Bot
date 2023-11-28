@@ -5,9 +5,10 @@ from time import sleep
 import asyncio
 from aiogram import Bot, Dispatcher, types
 from aiogram.utils import executor
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 
 import config
-import keyboard
+import keyboard as kb
 
 bot = Bot(token=config.TOKEN_API)
 dp = Dispatcher(bot=bot)
@@ -15,14 +16,17 @@ dp = Dispatcher(bot=bot)
 
 @dp.message_handler(commands=['start'])
 async def start_command(message: types.Message):
-    await message.answer(text=config.START_TEXT)
-    # await message.delete()
+    await message.answer(text=config.START_TEXT, reply_markup=kb.keyb)
 
 
-@dp.message_handler(commands=['help'])
-async def help_command(message: types.Message):
-    await message.answer(text=config.HELP_COMMANDS)
-    # await message.delete()
+@dp.message_handler(text=['Информация'])
+async def information_command(message: types.Message):
+    await message.answer(text=config.INFORMATION_TEXT)
+
+
+@dp.message_handler(text=['Начать игру'])
+async def information_command(message: types.Message):
+    await message.answer(text=config.START_GAME_TEXT)
 
 
 if __name__ == '__main__':
