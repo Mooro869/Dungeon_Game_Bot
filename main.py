@@ -1,4 +1,5 @@
 import logging
+import time
 from random import randint
 from time import sleep
 
@@ -26,7 +27,10 @@ async def information_command(message: types.Message):
 
 @dp.message_handler(text=['Начать игру'])
 async def information_command(message: types.Message):
-    await message.answer(text=config.START_GAME_TEXT)
+    await message.answer(text=config.START_GAME_TEXT, reply_markup=kb.сharacter_button)
+
+
+
 
 
 if __name__ == '__main__':
