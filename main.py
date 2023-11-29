@@ -1,12 +1,6 @@
-import logging
-import time
 from random import randint
-from time import sleep
-
-import asyncio
 from aiogram import Bot, Dispatcher, types
 from aiogram.utils import executor
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 
 import config
 import keyboard as kb
@@ -30,7 +24,7 @@ async def information_command(message: types.Message):
     await message.answer(text=config.START_GAME_TEXT, reply_markup=kb.persons_button)
 
 
-
+# осталось сделать рабочие кнопки ВОЛШЕБНИКА И РЫЦАРЯ И ПЕРЕДАВАТЬ ИХ В ИМЕННЫЕ ФАЙЛЫ
 
 
 if __name__ == '__main__':
