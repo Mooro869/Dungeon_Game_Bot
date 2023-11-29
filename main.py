@@ -24,7 +24,7 @@ async def information_command(message: types.Message):
     await message.answer(text=config.START_GAME_TEXT, reply_markup=kb.persons_button)
 
 
-# осталось сделать рабочие кнопки ВОЛШЕБНИКА И РЫЦАРЯ И ПЕРЕДАВАТь ИХ В ИМЕННЫЕ ФАЙЛЫ
+# осталось сделать рабочие кнопки ВОЛШЕБНИКА И РЫЦАРЯ И ПЕРЕДАВАТЬ ИХ В ИМЕННЫЕ ФАЙЛЫ
 
 
 if __name__ == '__main__':
