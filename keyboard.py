@@ -5,9 +5,9 @@ info_button = types.KeyboardButton('Информация')
 start_game = types.KeyboardButton('Начать игру')
 keyb.add(info_button, start_game)
 
-сharacter_button = types.InlineKeyboardMarkup(row_width=1)
+persons_button = types.InlineKeyboardMarkup(row_width=1)
 wizard = types.InlineKeyboardButton("Волшебник", callback_data="wizard")
 knight = types.InlineKeyboardButton("Рыцарь", callback_data="knight")
-dasha = types.InlineKeyboardButton("Даша", callback_data="dasha")
+priest = types.InlineKeyboardButton("Священник", callback_data="priest")
 
-сharacter_button.add(wizard, knight, dasha)
+persons_button.add(wizard, knight, priest)

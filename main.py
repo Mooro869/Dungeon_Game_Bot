@@ -27,7 +27,7 @@ async def information_command(message: types.Message):
 
 @dp.message_handler(text=['Начать игру'])
 async def information_command(message: types.Message):
-    await message.answer(text=config.START_GAME_TEXT, reply_markup=kb.сharacter_button)
+    await message.answer(text=config.START_GAME_TEXT, reply_markup=kb.persons_button)
 
 
 
