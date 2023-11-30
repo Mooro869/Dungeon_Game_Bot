@@ -24,7 +24,12 @@ async def information_command(message: types.Message):
     await message.answer(text=config.START_GAME_TEXT, reply_markup=kb.persons_button)
 
 
-# осталось сделать рабочие кнопки ВОЛШЕБНИКА И РЫЦАРЯ И ПЕРЕДАВАТЬ ИХ В ИМЕННЫЕ ФАЙЛЫ
+@dp.callback_query_handler()  # Кнопка при выборе персонажей
+async def wizard_change(callback: types.CallbackQuery):
+    if callback.data == 'wizard':
+        await bot.send_message(chat_id=callback.from_user.id, text=config.WIZARD_HISTORY)
+    elif callback.data == 'knight':
+        await bot.send_message(chat_id=callback.from_user.id, text=config.KNIGHT_HISTORY)
 
 
 if __name__ == '__main__':

@@ -47,3 +47,11 @@ KNIGHT_OPS = f'''
 Здоровье: {config.knight["hp"]}\n
 Сила: {config.knight["pw"]}
 '''
+
+WIZARD_HISTORY = '''
+Волшебник, хороший выбор!
+'''
+
+KNIGHT_HISTORY = '''
+Рыцарь, хороший выбор!
+'''
