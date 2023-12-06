@@ -13,14 +13,17 @@ knight = types.KeyboardButton("Рыцарь", callback_data="knight")
 persons_button.add(wizard, knight)
 
 # Основные кнопки
-attack = 'Атаковать👊'
-away = types.KeyboardButton('Сбежать🏃')
-door1 = types.KeyboardButton('Первая дверь🚪', callback_data='door1')
-door2 = types.KeyboardButton('Вторая дверь🚪', callback_data='door2')
 battle = types.InlineKeyboardMarkup(row_width=2)
+attack = types.KeyboardButton('Атаковать👊', callback_data='attack')
+away = types.KeyboardButton('Сбежать🏃', callback_data='away')
 battle.add(attack, away)
 
-# Кнопки для дверей
+# Двери
 doors = types.InlineKeyboardMarkup(row_width=2)
+door1 = types.KeyboardButton('Первая дверь🚪', callback_data='door1')
+door2 = types.KeyboardButton('Вторая дверь🚪', callback_data='door2')
 doors.add(door1, door2)
+
+
+
 

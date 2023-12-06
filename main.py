@@ -38,8 +38,22 @@ async def wizard_delete_button(callback_query: types.CallbackQuery):
 
 # Комната 1 Дверь 1
 @dp.callback_query_handler(lambda x: x.data == "door1")
-async def wizard_room1(callback_query: types.CallbackQuery):
-    await bot.send_message(callback_query.from_user.id, config.___, reply_markup=kb.battle)
+async def wizard_room1_delete_button(callback_query: types.CallbackQuery):
+    await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
+    await bot.send_message(callback_query.from_user.id, config.SPIDER_MEETING, reply_markup=kb.battle)
+# Действия при атаке 1_1
+@dp.callback_query_handler(lambda x: x.data == "attack")
+async def wizard_room1_attack_button(callback_query: types.CallbackQuery):
+    await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
+    while config.wizard['hp'] > 0 and config.spider['hp'] > 0:
+        w_push = randint(1, config.wizard['pw'])
+        s_push = randint(1, config.spider['pw'])
+        config.spider['hp'] -= w_push
+        config.wizard['hp'] -= s_push
+        # продолжить писать отсюда
+
+
+
 
 
 
