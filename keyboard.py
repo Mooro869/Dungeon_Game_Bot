@@ -8,8 +8,8 @@ keyb.add(info_button, start_game)
 
 # Кнопки персонажа
 persons_button = types.InlineKeyboardMarkup(row_width=2)
-wizard = types.KeyboardButton("Волшебник", callback_data="wizard")
-knight = types.KeyboardButton("Рыцарь", callback_data="knight")
+wizard = types.KeyboardButton("Волшебник🧙‍♂️", callback_data="wizard")
+knight = types.KeyboardButton("Рыцарь⚔️", callback_data="knight")
 persons_button.add(wizard, knight)
 
 # Основные кнопки
