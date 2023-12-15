@@ -6,10 +6,10 @@ from aiogram import executor
 import config
 import keyboard as kb
 
-
-# bot = Bot(token=config.TOKEN_API)
-bot = Bot(token=config.TOKEN_API, proxy='http://10.0.48.52:3128')
+bot = Bot(token=config.TOKEN_API)
+# bot = Bot(token=config.TOKEN_API, proxy='http://10.0.48.52:3128')
 dp = Dispatcher(bot=bot)
+
 
 # НАЧАЛО
 @dp.message_handler(commands=['start'])
@@ -41,6 +41,8 @@ async def wizard_delete_button(callback_query: types.CallbackQuery):
 async def wizard_room1_delete_button(callback_query: types.CallbackQuery):
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(callback_query.from_user.id, config.SPIDER_MEETING, reply_markup=kb.battle)
+
+
 # Действия при атаке 1_1
 @dp.callback_query_handler(lambda x: x.data == "attack")
 async def wizard_room1_attack_button(callback_query: types.CallbackQuery):
@@ -50,18 +52,19 @@ async def wizard_room1_attack_button(callback_query: types.CallbackQuery):
         s_push = randint(1, config.spider['pw'])
         config.spider['hp'] -= w_push
         config.wizard['hp'] -= s_push
-        # продолжить писать отсюда
 
+        if config.wizard['hp'] <= 0:  # Проверка жив ли персонаж
+            config.spider['hp'] = 40  # Возвращаем здоровье пауку после драки
 
+            await bot.send_message(callback_query.from_user.id, text=config.YOU_DEAD_SPIDER_WIZARD)
+            break
+        elif config.wizard['hp'] >= 1:  # Действия при победе над пауком
+            config.spider['hp'] = 40
 
-
-
-
-
-
-
-
-
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SPIDER_WIZARD)
+            await bot.send_message(chat_id=callback_query.from_user.id,
+                                   text=config.AFTER_FIGHT_WIZARD)  # Вывод здоровья
+            break
 
 
 # РЫЦАРЬ
@@ -71,7 +74,6 @@ async def knight_delete_button(callback_query: types.CallbackQuery):
     await bot.send_message(callback_query.from_user.id, config.KNIGHT_HISTORY)
     time.sleep(5)  # написать время ожидания после вывода текста
     await bot.send_message(callback_query.from_user.id, config.KNIGHT_START_TEXT)
-
 
 
 if __name__ == '__main__':

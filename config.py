@@ -90,3 +90,21 @@ GOLEM_MEETING = f'''
 Здоровье: {golem["hp"]}\n
 Сила: {golem["pw"]}
 '''
+
+YOU_DEAD_SPIDER_WIZARD = '''
+Вы умерли от лап паука!
+Игра закончена!
+'''
+
+YOU_WIN_SPIDER_WIZARD = '''
+Вы победили паука!
+'''
+
+AFTER_WIN_SPIDER_WIZARD = '''
+???
+'''
+
+AFTER_FIGHT_WIZARD = f'''
+После боя у вас осталось здоровья:\n
+{wizard['hp']}
+'''
