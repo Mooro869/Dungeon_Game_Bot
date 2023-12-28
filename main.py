@@ -62,13 +62,10 @@ async def wizard_room1_attack_button(callback_query: types.CallbackQuery):
             break
         elif config.wizard['hp'] >= 1:  # Действия при победе над пауком
             config.spider['hp'] = 40
-
             break
         await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SPIDER_WIZARD)
     # Вывод здоровья
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.AFTER_FIGHT_WIZARD_HP + str(config.wizard['hp']))
-
-    await bot.send_message(callback_query.from_user.id, text=config.wizard['hp'])  # Тестовый вывод текста
 
 
 # Действия при побеге 1_1
@@ -80,6 +77,13 @@ async def wizard_room1_attack_button(callback_query: types.CallbackQuery):
 
 # дописать побег и продолжить вторую дверь
 # понять как после побега исопользовать атаку хотя она уже есть
+
+
+
+
+
+
+
 
 # РЫЦАРЬ
 @dp.callback_query_handler(lambda x: x.data == "knight")
