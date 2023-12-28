@@ -1,6 +1,6 @@
 import time
-from random import randint
-
+# from random import randint
+import random
 from aiogram import Bot, Dispatcher, types
 from aiogram import executor
 
@@ -50,8 +50,8 @@ async def wizard_room1_attack_button(callback_query: types.CallbackQuery):
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
     while config.wizard['hp'] > 0 and config.spider['hp'] > 0:
-        w_push = randint(1, config.wizard['pw'])
-        s_push = randint(1, config.spider['pw'])
+        w_push = random.randint(1, config.wizard['pw'])
+        s_push = random.randint(1, config.spider['pw'])
         config.spider['hp'] -= w_push
         config.wizard['hp'] -= s_push
 
@@ -63,11 +63,12 @@ async def wizard_room1_attack_button(callback_query: types.CallbackQuery):
         elif config.wizard['hp'] >= 1:  # Действия при победе над пауком
             config.spider['hp'] = 40
 
-            await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SPIDER_WIZARD)
-            await bot.send_message(chat_id=callback_query.from_user.id,
-                                   text=config.AFTER_FIGHT_WIZARD)  # Вывод здоровья
             break
-    await bot.send_message(callback_query.from_user.id, text='тест')  # Тестовый вывод текста
+        await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SPIDER_WIZARD)
+    # Вывод здоровья
+    await bot.send_message(chat_id=callback_query.from_user.id, text=config.AFTER_FIGHT_WIZARD_HP + str(config.wizard['hp']))
+
+    await bot.send_message(callback_query.from_user.id, text=config.wizard['hp'])  # Тестовый вывод текста
 
 
 # Действия при побеге 1_1
@@ -75,6 +76,8 @@ async def wizard_room1_attack_button(callback_query: types.CallbackQuery):
 async def wizard_room1_attack_button(callback_query: types.CallbackQuery):
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_WIZARD_SPIDER)
+
+
 # дописать побег и продолжить вторую дверь
 # понять как после побега исопользовать атаку хотя она уже есть
 
