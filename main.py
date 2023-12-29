@@ -38,14 +38,14 @@ async def wizard_delete_button(callback_query: types.CallbackQuery):
 
 
 # Комната 1 Дверь 1. Паук атака
-@dp.callback_query_handler(lambda x: x.data == "door1")
+@dp.callback_query_handler(lambda x: x.data == "door1_1_1")
 async def wizard_room1_delete_button(callback_query: types.CallbackQuery):  # Функция с основным выводом текста
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(callback_query.from_user.id, config.SPIDER_MEETING, reply_markup=kb.battle)
 
 
 # Действия при атаке 1_1
-@dp.callback_query_handler(lambda x: x.data == "attack")
+@dp.callback_query_handler(lambda x: x.data == "attack1_1")
 async def wizard_room1_attack_button(callback_query: types.CallbackQuery):
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
@@ -69,7 +69,7 @@ async def wizard_room1_attack_button(callback_query: types.CallbackQuery):
 
 
 # Действия при побеге 1_1
-@dp.callback_query_handler(lambda x: x.data == "away")
+@dp.callback_query_handler(lambda x: x.data == "away1_1")
 async def wizard_room1_attack_button(callback_query: types.CallbackQuery):
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_WIZARD_SPIDER)
