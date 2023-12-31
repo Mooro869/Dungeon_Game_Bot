@@ -1,5 +1,4 @@
 import time
-# from random import randint
 import random
 from aiogram import Bot, Dispatcher, types
 from aiogram import executor
@@ -7,8 +6,8 @@ from aiogram import executor
 import config
 import keyboard as kb
 
-bot = Bot(token=config.TOKEN_API)
-# bot = Bot(token=config.TOKEN_API, proxy='http://10.0.48.52:3128')
+# bot = Bot(token=config.TOKEN_API)
+bot = Bot(token=config.TOKEN_API, proxy='http://10.0.48.52:3128')
 dp = Dispatcher(bot=bot)
 
 
@@ -33,15 +32,15 @@ async def information_command(message: types.Message):
 async def wizard_delete_button(callback_query: types.CallbackQuery):
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(callback_query.from_user.id, config.WIZARD_HISTORY)
-    # Вывод дверных кнопок
-    await bot.send_message(callback_query.from_user.id, config.WIZARD_START_TEXT, reply_markup=kb.doors)
+    # Вывод дверных кнопок 1 комнаты
+    await bot.send_message(callback_query.from_user.id, config.WIZARD_START_TEXT, reply_markup=kb.doors1)
 
 
-# Комната 1 Дверь 1. Паук атака
+# 1_1 Паук
 @dp.callback_query_handler(lambda x: x.data == "door1_1_1")
 async def wizard_room1_delete_button(callback_query: types.CallbackQuery):  # Функция с основным выводом текста
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
-    await bot.send_message(callback_query.from_user.id, config.SPIDER_MEETING, reply_markup=kb.battle)
+    await bot.send_message(callback_query.from_user.id, config.SPIDER_MEETING, reply_markup=kb.battle1_1)
 
 
 # Действия при атаке 1_1
@@ -65,24 +64,34 @@ async def wizard_room1_attack_button(callback_query: types.CallbackQuery):
             break
         await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SPIDER_WIZARD)
     # Вывод здоровья
-    await bot.send_message(chat_id=callback_query.from_user.id, text=config.AFTER_FIGHT_WIZARD_HP + str(config.wizard['hp']))
+    await bot.send_message(chat_id=callback_query.from_user.id,
+                           text=config.AFTER_FIGHT_WIZARD_HP + str(config.wizard['hp']))
+    # продолжить писать атаку(после атаки)
 
 
-# Действия при побеге 1_1
+# Действия при побеге 1_1(идете в 1_2)
 @dp.callback_query_handler(lambda x: x.data == "away1_1")
 async def wizard_room1_attack_button(callback_query: types.CallbackQuery):
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
-    await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_WIZARD_SPIDER)
+    await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_WIZARD_SPIDER_1_1)
+    # Проверка колличества здоровья после побега
+    config.wizard['hp'] -= 5
+    if config.wizard['hp'] <= 0:  # если нет здоровья - конец
+        await bot.send_message(callback_query.from_user.id, text=config.NO_HP_DEAD_WIZARD)
+    else:  # если здоровье есть
+        await bot.send_message(callback_query.from_user.id,
+                               text=config.BEFORE_AFTER_AWAY_WIZARD_1_1 + str(config.wizard['hp']))
+        await bot.send_message(callback_query.from_user.id, text=config.AFTER_AWAY_WIZARD_1_1)
 
 
 # дописать побег и продолжить вторую дверь
-# понять как после побега исопользовать атаку хотя она уже есть
 
 
-
-
-
-
+# 1_2 Слайм
+@dp.callback_query_handler(lambda x: x.data == "door1_2_1")
+async def wizard_room1_delete_button(callback_query: types.CallbackQuery):  # Функция с основным выводом текста
+    await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
+    await bot.send_message(callback_query.from_user.id, config.SLIME_MEETING, reply_markup=kb.battle1_2)
 
 
 # РЫЦАРЬ
@@ -90,8 +99,9 @@ async def wizard_room1_attack_button(callback_query: types.CallbackQuery):
 async def knight_delete_button(callback_query: types.CallbackQuery):
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(callback_query.from_user.id, config.KNIGHT_HISTORY)
-    time.sleep(5)  # написать время ожидания после вывода текста
+    time.sleep(3)  # написать время ожидания после вывода текста
     await bot.send_message(callback_query.from_user.id, config.KNIGHT_START_TEXT)
+    await bot.send_message(callback_query.from_user.id, text='РЫЦАРЬ НЕ РАБОТАЕТ!')
 
 
 if __name__ == '__main__':
