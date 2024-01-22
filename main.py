@@ -6,8 +6,8 @@ from aiogram import executor
 import config
 import keyboard as kb
 
-# bot = Bot(token=config.TOKEN_API)
-bot = Bot(token=config.TOKEN_API, proxy='http://10.0.48.52:3128')
+bot = Bot(token=config.TOKEN_API)
+# bot = Bot(token=config.TOKEN_API, proxy='http://10.0.48.52:3128')
 dp = Dispatcher(bot=bot)
 
 
@@ -35,19 +35,23 @@ async def wizard_delete_button(callback_query: types.CallbackQuery):
     # Вывод дверных кнопок 1 комнаты
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.WIZARD_START_TEXT, reply_markup=kb.doors1)
 
+'''
+От этого текста
+будут начитаться доп фукнции для упрощения чтения и редактирования кода
+'''
 
 # 1_1 Паук
 @dp.callback_query_handler(lambda x: x.data == "door1_1_1")
 async def wizard_room1_buttons(callback_query: types.CallbackQuery):  # Функция с основным выводом текста
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
-    # вывод кнопок атаки
+    # вывод кнопок
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.SPIDER_MEETING, reply_markup=kb.battle1_1)
-
 
 
 # Действия при атаке 1_1
 @dp.callback_query_handler(lambda x: x.data == "attack1_1")
-async def wizard_room1_delete_buttons(callback_query: types.CallbackQuery): # удаление кнопок атаки
+async def wizard_room1_delete_buttons(callback_query: types.CallbackQuery):
+    # Удаление кнопок
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
     while config.wizard['hp'] > 0 and config.spider['hp'] > 0:
@@ -55,14 +59,12 @@ async def wizard_room1_delete_buttons(callback_query: types.CallbackQuery): # у
         s_push = random.randint(1, config.spider['pw'])
         config.spider['hp'] -= w_push
         config.wizard['hp'] -= s_push
-
         if config.wizard['hp'] <= 0:  # Проверка жив ли персонаж
-            config.spider['hp'] = 40  # Возвращаем здоровье пауку после драки
-
+            config.spider['hp'] = config.HP_SPIDER  # Возвращаем здоровье пауку после драки
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_DEAD_SPIDER_WIZARD)
             break
         elif config.wizard['hp'] >= 1:  # Действия при победе над пауком
-            config.spider['hp'] = 40
+            config.spider['hp'] = config.HP_SPIDER
             break
         await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SPIDER_WIZARD)
     # Вывод здоровья
@@ -70,34 +72,46 @@ async def wizard_room1_delete_buttons(callback_query: types.CallbackQuery): # у
                            text=config.AFTER_FIGHT_WIZARD_HP + str(config.wizard['hp']))
     # Создание кнопок второй комнаты
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.TWO_ROOM_WIZARD, reply_markup=kb.doors2)
+    # закончен
+
 
 # 2_1 Слайм
 @dp.callback_query_handler(lambda x: x.data == "door1_2_1")
 async def wizard_room2_delete_buttons(callback_query: types.CallbackQuery):
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
-    await bot.send_message(chat_id=callback_query.from_user.id, text=config.SLIME_MEETING)
     # вывод кнопок
-    await bot.send_message(chat_id=callback_query.from_user.id, reply_markup=kb.battle2_1)
+    await bot.send_message(chat_id=callback_query.from_user.id, text=config.SLIME_MEETING, reply_markup=kb.battle2_1)
+
 
 # Действия при атаке 2_1
 @dp.callback_query_handler(lambda x: x.data == "attack2_1")
-async def wizard_room1_delete_buttons(callback_query: types.CallbackQuery):
-    # удаление кнопок атаки
+async def wizard_room2_delete_buttons(callback_query: types.CallbackQuery):
+    # Удаление кнопок
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
-    while config.wizard['hp'] > 0 and config.spider['hp'] > 0:
+    while config.wizard['hp'] > 0 and config.slime['hp'] > 0:
         w_push = random.randint(1, config.wizard['pw'])
-        s_push = random.randint(1, config.spider['pw'])
-        config.spider['hp'] -= w_push
-        config.wizard['hp'] -= s_push
-
+        sl_push = random.randint(1, config.slime['pw'])
+        config.slime['hp'] -= w_push
+        config.wizard['hp'] -= sl_push
         if config.wizard['hp'] <= 0:  # Проверка жив ли персонаж
-            config.spider['hp'] = 40  # Возвращаем здоровье пауку после драки
+            config.slime['hp'] = config.HP_SLIME  # Возвращаем здоровье пауку после драки
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_DEAD_SLIME_WIZARD)
+            break
+        elif config.wizard['hp'] >= 1:  # Действия при победе над пауком
+            config.slime['hp'] = config.HP_SLIME
+            break
+        await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SLIME_WIZARD)
+        # Вывод здоровья
+        await bot.send_message(chat_id=callback_query.from_user.id,
+                               text=config.AFTER_FIGHT_WIZARD_HP + str(config.wizard['hp']))
+        # Создание кнопок второй комнаты
+        await bot.send_message(chat_id=callback_query.from_user.id, text=config.THREE_ROOM_WIZARD,
+                               reply_markup=kb.doors3)
+        # закончен
 
 
-
-
-# Действия при побеге 1_1(идете в 1_2)
+# Действия при побеге 1_1(переход в 1_2(битва с пауком))
 @dp.callback_query_handler(lambda x: x.data == "away1_1")
 async def wizard_room1_away_buttons(callback_query: types.CallbackQuery):
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
@@ -108,11 +122,27 @@ async def wizard_room1_away_buttons(callback_query: types.CallbackQuery):
         await bot.send_message(callback_query.from_user.id, text=config.NO_HP_DEAD_WIZARD)
     else:  # если здоровье есть
         await bot.send_message(chat_id=callback_query.from_user.id,
-                               text=config.BEFORE_AFTER_AWAY_WIZARD_1_1 + str(config.wizard['hp']))
-        await bot.send_message(chat_id=callback_query.from_user.id, text=config.AFTER_AWAY_WIZARD_1_1)
-
-
-# дописать побег и продолжить вторую дверь
+                               text=config.AFTER_AWAY_WIZARD_1_1 + str(config.wizard['hp']))
+        await bot.send_message(chat_id=callback_query.from_user.id, text=config.TRANSITION_TO_1_2_WIZARD)
+        # Цикл атаки
+        while config.wizard['hp'] > 0 and config.spider['hp'] > 0:
+            w_push = random.randint(1, config.wizard['pw'])
+            s_push = random.randint(1, config.spider['pw'])
+            config.spider['hp'] -= w_push
+            config.wizard['hp'] -= s_push
+            if config.wizard['hp'] <= 0:  # Проверка жив ли персонаж
+                config.spider['hp'] = config.HP_SPIDER  # Возвращаем здоровье пауку после драки
+                await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_DEAD_SPIDER_WIZARD)
+                break
+            elif config.wizard['hp'] >= 1:  # Действия при победе над пауком
+                config.spider['hp'] = config.HP_SPIDER
+                break
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SPIDER_WIZARD)
+        # Вывод здоровья
+        await bot.send_message(chat_id=callback_query.from_user.id,
+                               text=config.AFTER_FIGHT_WIZARD_HP + str(config.wizard['hp']))
+        await bot.send_message(chat_id=callback_query.from_user.id, text=config.TWO_ROOM_WIZARD, reply_markup=kb.doors2)
+        # закончен
 
 
 # 1_2 Слайм
