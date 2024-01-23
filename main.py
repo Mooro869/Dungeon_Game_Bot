@@ -35,10 +35,11 @@ async def wizard_delete_button(callback_query: types.CallbackQuery):
     # Вывод дверных кнопок 1 комнаты
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.WIZARD_START_TEXT, reply_markup=kb.doors1)
 
+
 '''
-От этого текста
-будут начитаться доп фукнции для упрощения чтения и редактирования кода
+допы
 '''
+
 
 # 1_1 Паук
 @dp.callback_query_handler(lambda x: x.data == "door1_1_1")
@@ -46,6 +47,65 @@ async def wizard_room1_buttons(callback_query: types.CallbackQuery):  # Функ
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # вывод кнопок
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.SPIDER_MEETING, reply_markup=kb.battle1_1)
+
+
+# 1_2 Слайм
+@dp.callback_query_handler(lambda x: x.data == "door1_1_2")
+async def wizard_room1_buttons(callback_query: types.CallbackQuery):  # Функция с основным выводом текста
+    await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
+    await bot.send_message(chat_id=callback_query.from_user.id, text=config.SLIME_MEETING, reply_markup=kb.battle1_2)
+
+
+# 2_1 Слайм
+@dp.callback_query_handler(lambda x: x.data == "door1_2_1")
+async def wizard_room2_delete_buttons(callback_query: types.CallbackQuery):
+    await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
+    # вывод кнопок
+    await bot.send_message(chat_id=callback_query.from_user.id, text=config.SLIME_MEETING, reply_markup=kb.battle2_1)
+
+
+# 2_2 Скелет
+@dp.callback_query_handler(lambda x: x.data == "door1_2_2")
+async def wizard_room2_delete_buttons(callback_query: types.CallbackQuery):
+    await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
+    # вывод кнопок
+    await bot.send_message(chat_id=callback_query.from_user.id, text=config.SKELETON_MEETING, reply_markup=kb.battle2_2)
+
+
+# 3_1 Голем
+@dp.callback_query_handler(lambda x: x.data == "door1_3_1")
+async def wizard_room2_delete_buttons(callback_query: types.CallbackQuery):
+    await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
+    # вывод кнопок
+    await bot.send_message(chat_id=callback_query.from_user.id, text=config.GOLEM_MEETING, reply_markup=kb.battle3_1)
+
+
+# 3_2 Паук
+@dp.callback_query_handler(lambda x: x.data == "door1_3_2")
+async def wizard_room2_delete_buttons(callback_query: types.CallbackQuery):
+    await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
+    # вывод кнопок
+    await bot.send_message(chat_id=callback_query.from_user.id, text=config.SPIDER_MEETING, reply_markup=kb.battle3_2)
+
+
+# 4_1 Паук
+@dp.callback_query_handler(lambda x: x.data == "door1_4_1")
+async def wizard_room2_delete_buttons(callback_query: types.CallbackQuery):
+    await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
+    # вывод кнопок
+    await bot.send_message(chat_id=callback_query.from_user.id, text=config.SPIDER_MEETING, reply_markup=kb.battle4_1)
+
+
+# 4_2 Скелет
+@dp.callback_query_handler(lambda x: x.data == "door1_4_2")
+async def wizard_room2_delete_buttons(callback_query: types.CallbackQuery):
+    await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
+    # вывод кнопок
+    await bot.send_message(chat_id=callback_query.from_user.id, text=config.SKELETON_MEETING, reply_markup=kb.battle4_2)
+
+'''
+основа
+'''
 
 
 # Действия при атаке 1_1
@@ -75,14 +135,6 @@ async def wizard_room1_delete_buttons(callback_query: types.CallbackQuery):
     # закончен
 
 
-# 2_1 Слайм
-@dp.callback_query_handler(lambda x: x.data == "door1_2_1")
-async def wizard_room2_delete_buttons(callback_query: types.CallbackQuery):
-    await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
-    # вывод кнопок
-    await bot.send_message(chat_id=callback_query.from_user.id, text=config.SLIME_MEETING, reply_markup=kb.battle2_1)
-
-
 # Действия при атаке 2_1
 @dp.callback_query_handler(lambda x: x.data == "attack2_1")
 async def wizard_room2_delete_buttons(callback_query: types.CallbackQuery):
@@ -95,7 +147,7 @@ async def wizard_room2_delete_buttons(callback_query: types.CallbackQuery):
         config.slime['hp'] -= w_push
         config.wizard['hp'] -= sl_push
         if config.wizard['hp'] <= 0:  # Проверка жив ли персонаж
-            config.slime['hp'] = config.HP_SLIME  # Возвращаем здоровье пауку после драки
+            config.slime['hp'] = config.HP_SLIME  # Возвращаем здоровье слайму после драки
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_DEAD_SLIME_WIZARD)
             break
         elif config.wizard['hp'] >= 1:  # Действия при победе над пауком
@@ -111,19 +163,27 @@ async def wizard_room2_delete_buttons(callback_query: types.CallbackQuery):
         # закончен
 
 
+'''
+побеги
+'''
+
+
 # Действия при побеге 1_1(переход в 1_2(битва с пауком))
 @dp.callback_query_handler(lambda x: x.data == "away1_1")
 async def wizard_room1_away_buttons(callback_query: types.CallbackQuery):
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_WIZARD_SPIDER_1_1)
-    # Проверка колличества здоровья после побега
+    time.sleep(2)
+    # Проверка количества здоровья после побега
     config.wizard['hp'] -= 5
     if config.wizard['hp'] <= 0:  # если нет здоровья - конец
         await bot.send_message(callback_query.from_user.id, text=config.NO_HP_DEAD_WIZARD)
     else:  # если здоровье есть
         await bot.send_message(chat_id=callback_query.from_user.id,
                                text=config.AFTER_AWAY_WIZARD_1_1 + str(config.wizard['hp']))
+        time.sleep(1)
         await bot.send_message(chat_id=callback_query.from_user.id, text=config.TRANSITION_TO_1_2_WIZARD)
+        time.sleep(2)
         # Цикл атаки
         while config.wizard['hp'] > 0 and config.spider['hp'] > 0:
             w_push = random.randint(1, config.wizard['pw'])
@@ -141,15 +201,9 @@ async def wizard_room1_away_buttons(callback_query: types.CallbackQuery):
         # Вывод здоровья
         await bot.send_message(chat_id=callback_query.from_user.id,
                                text=config.AFTER_FIGHT_WIZARD_HP + str(config.wizard['hp']))
+        time.sleep(1)
         await bot.send_message(chat_id=callback_query.from_user.id, text=config.TWO_ROOM_WIZARD, reply_markup=kb.doors2)
         # закончен
-
-
-# 1_2 Слайм
-@dp.callback_query_handler(lambda x: x.data == "door1_2_1")
-async def wizard_room1_buttons(callback_query: types.CallbackQuery):  # Функция с основным выводом текста
-    await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
-    await bot.send_message(chat_id=callback_query.from_user.id, text=config.SLIME_MEETING, reply_markup=kb.battle1_2)
 
 
 # РЫЦАРЬ
