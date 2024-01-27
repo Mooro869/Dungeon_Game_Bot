@@ -69,26 +69,26 @@ battle5.add(attack5)  # будет только кнопка атаки, так 
 # КНОПКИ ДВЕРЕЙ
 # Двери 1 команта
 doors1 = types.InlineKeyboardMarkup(row_width=2)
-door1_1_1 = types.KeyboardButton('Первая дверь🚪', callback_data='door1_1_1')
-door2_1_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='door2_1_2')
+door1_1_1 = types.KeyboardButton('Первая дверь🚪', callback_data='door1_1')
+door2_1_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='door1_2')
 doors1.add(door1_1_1, door2_1_2)
 
 # Двери 2 комната
 doors2 = types.InlineKeyboardMarkup(row_width=2)
-door1_2_1 = types.KeyboardButton('Первая дверь🚪', callback_data='door1_2_1')
-door2_2_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='door2_2_2')
+door1_2_1 = types.KeyboardButton('Первая дверь🚪', callback_data='door2_1')
+door2_2_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='door2_2')
 doors2.add(door1_2_1, door2_2_2)
 
 # Двери 3 комната
 doors3 = types.InlineKeyboardMarkup(row_width=2)
-door1_3_1 = types.KeyboardButton('Первая дверь🚪', callback_data='door1_3_1')
-door2_3_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='door2_3_2')
+door1_3_1 = types.KeyboardButton('Первая дверь🚪', callback_data='door3_1')
+door2_3_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='door3_2')
 doors3.add(door1_3_1, door2_3_2)
 
 # Двери 4 команта
 doors4 = types.InlineKeyboardMarkup(row_width=2)
-door1_4_1 = types.KeyboardButton('Первая дверь🚪', callback_data='door1_4_1')
-door2_4_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='door2_4_2')
+door1_4_1 = types.KeyboardButton('Первая дверь🚪', callback_data='door4_1')
+door2_4_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='door4_2')
 doors4.add(door1_1_1, door2_4_2)
 
 # Двери 5 комната
