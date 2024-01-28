@@ -352,29 +352,29 @@ async def wizard1_1_away(callback_query: types.CallbackQuery):
         await bot.send_message(callback_query.from_user.id, text=config.NO_HP_DEAD_WIZARD)
     else:  # если здоровье есть
         await bot.send_message(chat_id=callback_query.from_user.id,
-                               text=config.AFTER_AWAY_WIZARD_1_1 + str(config.wizard['hp']))
+                               text=config.AFTER_AWAY + str(config.wizard['hp']))
         time.sleep(1)
         await bot.send_message(chat_id=callback_query.from_user.id, text=config.TRANSITION_TO_1_2_WIZARD)
         time.sleep(2)
         # Цикл атаки
-        while config.wizard['hp'] > 0 and config.spider['hp'] > 0:
+        while config.wizard['hp'] > 0 and config.slime['hp'] > 0:
             w_push = random.randint(1, config.wizard['pw'])
-            sp_push = random.randint(1, config.spider['pw'])
-            config.spider['hp'] -= w_push
-            config.wizard['hp'] -= sp_push
+            sl_push = random.randint(1, config.slime['pw'])
+            config.slime['hp'] -= w_push
+            config.wizard['hp'] -= sl_push
             if config.wizard['hp'] <= 0:  # Проверка жив ли персонаж
-                config.spider['hp'] = config.HP_SPIDER  # Возвращаем здоровье пауку после драки
-                await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_DEAD_SPIDER_WIZARD)
+                config.slime['hp'] = config.HP_SLIME  # Возвращаем здоровье пауку после драки
+                await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_DEAD_SLIME_WIZARD)
                 break
             elif config.wizard['hp'] >= 1:  # Действия при победе над пауком
-                config.spider['hp'] = config.HP_SPIDER
+                config.slime['hp'] = config.HP_SLIME
                 break
-            await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SPIDER_WIZARD)
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SLIME_WIZARD)
         # Вывод здоровья
         await bot.send_message(chat_id=callback_query.from_user.id,
                                text=config.AFTER_FIGHT_WIZARD_HP + str(config.wizard['hp']))
         time.sleep(1)
-        await bot.send_message(chat_id=callback_query.from_user.id, text=config.TWO_ROOM_WIZARD_SLIME  ,
+        await bot.send_message(chat_id=callback_query.from_user.id, text=config.TWO_ROOM_WIZARD_SLIME,
                                reply_markup=kb.doors2)
         # закончен
 
@@ -391,7 +391,7 @@ async def wizard1_1_away(callback_query: types.CallbackQuery):
         await bot.send_message(callback_query.from_user.id, text=config.NO_HP_DEAD_WIZARD)
     else:  # если здоровье есть
         await bot.send_message(chat_id=callback_query.from_user.id,
-                               text=config.AFTER_AWAY_WIZARD_1_1 + str(config.wizard['hp']))
+                               text=config.AFTER_AWAY + str(config.wizard['hp']))
         time.sleep(1)
         await bot.send_message(chat_id=callback_query.from_user.id, text=config.TRANSITION_TO_1_1_WIZARD)
         time.sleep(2)
@@ -415,6 +415,84 @@ async def wizard1_1_away(callback_query: types.CallbackQuery):
         time.sleep(1)
         await bot.send_message(chat_id=callback_query.from_user.id, text=config.TWO_ROOM_WIZARD_SPIDER,
                                reply_markup=kb.doors2)
+        # закончен
+
+
+# Действия при побеге 2_1(переход в 2_2(битва со скелетом))
+@dp.callback_query_handler(lambda x: x.data == "away2_1")
+async def wizard2_1_away(callback_query: types.CallbackQuery):
+    await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
+    await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_WIZARD_SLIME_1_2)
+    time.sleep(2)
+    # Проверка количества здоровья после побега
+    config.wizard['hp'] -= 7
+    if config.wizard['hp'] <= 0:  # если нет здоровья - конец
+        await bot.send_message(callback_query.from_user.id, text=config.NO_HP_DEAD_WIZARD)
+    else:  # если здоровье есть
+        await bot.send_message(chat_id=callback_query.from_user.id,
+                               text=config.AFTER_AWAY + str(config.wizard['hp']))
+        time.sleep(1)
+        await bot.send_message(chat_id=callback_query.from_user.id, text=config.TRANSITION_TO_2_1_WIZARD)
+        time.sleep(2)
+        # Цикл атаки
+        while config.wizard['hp'] > 0 and config.skeleton['hp'] > 0:
+            w_push = random.randint(1, config.wizard['pw'])
+            sk_push = random.randint(1, config.skeleton['pw'])
+            config.skeleton['hp'] -= w_push
+            config.wizard['hp'] -= sk_push
+            if config.wizard['hp'] <= 0:  # Проверка жив ли персонаж
+                config.skeleton['hp'] = config.HP_SKELETON  # Возвращаем здоровье пауку после драки
+                await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_DEAD_SKELETON_WIZARD)
+                break
+            elif config.wizard['hp'] >= 1:  # Действия при победе над пауком
+                config.skeleton['hp'] = config.HP_SKELETON
+                break
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SKELETON_WIZARD)
+        # Вывод здоровья
+        await bot.send_message(chat_id=callback_query.from_user.id,
+                               text=config.AFTER_FIGHT_WIZARD_HP + str(config.wizard['hp']))
+        time.sleep(1)
+        await bot.send_message(chat_id=callback_query.from_user.id, text=config.THREE_ROOM_WIZARD_SKELETON,
+                               reply_markup=kb.doors3)
+        # закончен
+
+
+# Действия при побеге 2_2(переход в 2_1(битва со слаймом))
+@dp.callback_query_handler(lambda x: x.data == "away2_2")
+async def wizard2_2_away(callback_query: types.CallbackQuery):
+    await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
+    await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_WIZARD_SKELETON_2_1)
+    time.sleep(2)
+    # Проверка количества здоровья после побега
+    config.wizard['hp'] -= 7
+    if config.wizard['hp'] <= 0:  # если нет здоровья - конец
+        await bot.send_message(callback_query.from_user.id, text=config.NO_HP_DEAD_WIZARD)
+    else:  # если здоровье есть
+        await bot.send_message(chat_id=callback_query.from_user.id,
+                               text=config.AFTER_AWAY + str(config.wizard['hp']))
+        time.sleep(1)
+        await bot.send_message(chat_id=callback_query.from_user.id, text=config.TRANSITION_TO_2_1_WIZARD)
+        time.sleep(2)
+        # Цикл атаки
+        while config.wizard['hp'] > 0 and config.slime['hp'] > 0:
+            w_push = random.randint(1, config.wizard['pw'])
+            sl_push = random.randint(1, config.slime['pw'])
+            config.slime['hp'] -= w_push
+            config.wizard['hp'] -= sl_push
+            if config.wizard['hp'] <= 0:  # Проверка жив ли персонаж
+                config.slime['hp'] = config.HP_SLIME  # Возвращаем здоровье пауку после драки
+                await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_DEAD_SLIME_WIZARD)
+                break
+            elif config.wizard['hp'] >= 1:  # Действия при победе над пауком
+                config.slime['hp'] = config.HP_SLIME
+                break
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SLIME_WIZARD)
+        # Вывод здоровья
+        await bot.send_message(chat_id=callback_query.from_user.id,
+                               text=config.AFTER_FIGHT_WIZARD_HP + str(config.wizard['hp']))
+        time.sleep(1)
+        await bot.send_message(chat_id=callback_query.from_user.id, text=config.TWO_ROOM_WIZARD_SLIME,
+                               reply_markup=kb.doors3)
         # закончен
 
 
