@@ -67,7 +67,7 @@ attack5 = types.KeyboardButton('Атаковать👊', callback_data='attack5'
 battle5.add(attack5)  # будет только кнопка атаки, так как сражение против босса
 
 # КНОПКИ ДВЕРЕЙ
-# Двери 1 команта
+# Двери 1 комната
 doors1 = types.InlineKeyboardMarkup(row_width=2)
 door1_1_1 = types.KeyboardButton('Первая дверь🚪', callback_data='door1_1')
 door2_1_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='door1_2')
@@ -85,7 +85,7 @@ door1_3_1 = types.KeyboardButton('Первая дверь🚪', callback_data='d
 door2_3_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='door3_2')
 doors3.add(door1_3_1, door2_3_2)
 
-# Двери 4 команта
+# Двери 4 комната
 doors4 = types.InlineKeyboardMarkup(row_width=2)
 door1_4_1 = types.KeyboardButton('Первая дверь🚪', callback_data='door4_1')
 door2_4_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='door4_2')
