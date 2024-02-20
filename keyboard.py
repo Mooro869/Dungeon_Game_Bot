@@ -2,8 +2,8 @@ from aiogram import types
 
 # Кнопки при запуске бота
 keyb = types.ReplyKeyboardMarkup(resize_keyboard=True)
-info_button = types.KeyboardButton('Информация')
-start_game = types.KeyboardButton('Начать игру')
+info_button = types.KeyboardButton('Информацияℹ️')
+start_game = types.KeyboardButton('Начать игру🎮')
 keyb.add(info_button, start_game)
 
 # Кнопки персонажей
@@ -12,7 +12,10 @@ wizard = types.KeyboardButton("Волшебник🧙‍♂️", callback_data="
 knight = types.KeyboardButton("Рыцарь⚔️", callback_data="knight")
 persons_button.add(wizard, knight)
 
-# ВСЕ ОСНОВНЫЕ КНОПКИ ДЛЯ КАЖДОЙ ДВЕРИ
+'''
+ОСНОВНЫЕ КНОПКИ ДЛЯ КАЖДОЙ ДВЕРИ
+'''
+
 # Основные кнопки 1_1
 battle1_1 = types.InlineKeyboardMarkup(row_width=2)
 attack1_1 = types.KeyboardButton('Атаковать👊', callback_data='attack1_1')
@@ -62,11 +65,14 @@ away4_2 = types.KeyboardButton('Сбежать🏃', callback_data='away4_2')
 battle4_2.add(attack4_2, away4_2)
 
 # Основные кнопки 5
-battle5 = types.InlineKeyboardMarkup(row_width=2)
+battle5 = types.InlineKeyboardMarkup(row_width=1)
 attack5 = types.KeyboardButton('Атаковать👊', callback_data='attack5')
 battle5.add(attack5)  # будет только кнопка атаки, так как сражение против босса
 
-# КНОПКИ ДВЕРЕЙ
+'''
+КНОПКИ ДВЕРЕЙ
+'''
+
 # Двери 1 комната
 doors1 = types.InlineKeyboardMarkup(row_width=2)
 door1_1_1 = types.KeyboardButton('Первая дверь🚪', callback_data='door1_1')
