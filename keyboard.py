@@ -95,7 +95,7 @@ doors3.add(door1_3_1, door2_3_2)
 doors4 = types.InlineKeyboardMarkup(row_width=2)
 door1_4_1 = types.KeyboardButton('Первая дверь🚪', callback_data='door4_1')
 door2_4_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='door4_2')
-doors4.add(door1_1_1, door2_4_2)
+doors4.add(door1_4_1, door2_4_2)
 
 # Двери 5 комната
 doors5 = types.InlineKeyboardMarkup(row_width=2)
