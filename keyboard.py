@@ -14,90 +14,184 @@ persons_button.add(wizard, knight)
 
 '''
 ОСНОВНЫЕ КНОПКИ ДЛЯ КАЖДОЙ ДВЕРИ
+ВОЛШЕБНИК
 '''
 
 # Основные кнопки 1_1
-battle1_1 = types.InlineKeyboardMarkup(row_width=2)
-attack1_1 = types.KeyboardButton('Атаковать👊', callback_data='attack1_1')
-away1_1 = types.KeyboardButton('Сбежать🏃', callback_data='away1_1')
-battle1_1.add(attack1_1, away1_1)
+wizard_battle1_1 = types.InlineKeyboardMarkup(row_width=2)
+wizard_attack1_1 = types.KeyboardButton('Атаковать👊', callback_data='wizard_attack1_1')
+wizard_away1_1 = types.KeyboardButton('Сбежать🏃', callback_data='wizard_away1_1')
+wizard_battle1_1.add(wizard_attack1_1, wizard_away1_1)
 
 # Основные кнопки 1_2
-battle1_2 = types.InlineKeyboardMarkup(row_width=2)
-attack1_2 = types.KeyboardButton('Атаковать👊', callback_data='attack1_2')
-away1_2 = types.KeyboardButton('Сбежать🏃', callback_data='away1_2')
-battle1_2.add(attack1_2, away1_2)
+wizard_battle1_2 = types.InlineKeyboardMarkup(row_width=2)
+wizard_attack1_2 = types.KeyboardButton('Атаковать👊', callback_data='wizard_attack1_2')
+wizard_away1_2 = types.KeyboardButton('Сбежать🏃', callback_data='wizard_away1_2')
+wizard_battle1_2.add(wizard_attack1_2, wizard_away1_2)
 
 # Основные кнопки 2_1
-battle2_1 = types.InlineKeyboardMarkup(row_width=2)
-attack2_1 = types.KeyboardButton('Атаковать👊', callback_data='attack2_1')
-away2_1 = types.KeyboardButton('Сбежать🏃', callback_data='away2_1')
-battle2_1.add(attack2_1, away2_1)
+wizard_battle2_1 = types.InlineKeyboardMarkup(row_width=2)
+wizard_attack2_1 = types.KeyboardButton('Атаковать👊', callback_data='wizard_attack2_1')
+wizard_away2_1 = types.KeyboardButton('Сбежать🏃', callback_data='wizard_away2_1')
+wizard_battle2_1.add(wizard_attack2_1, wizard_away2_1)
 
 # Основные кнопки 2_2
-battle2_2 = types.InlineKeyboardMarkup(row_width=2)
-attack2_2 = types.KeyboardButton('Атаковать👊', callback_data='attack2_2')
-away2_2 = types.KeyboardButton('Сбежать🏃', callback_data='away2_2')
-battle2_2.add(attack2_2, away2_2)
+wizard_battle2_2 = types.InlineKeyboardMarkup(row_width=2)
+wizard_attack2_2 = types.KeyboardButton('Атаковать👊', callback_data='wizard_attack2_2')
+wizard_away2_2 = types.KeyboardButton('Сбежать🏃', callback_data='wizard_away2_2')
+wizard_battle2_2.add(wizard_attack2_2, wizard_away2_2)
 
 # Основные кнопки 3_1
-battle3_1 = types.InlineKeyboardMarkup(row_width=2)
-attack3_1 = types.KeyboardButton('Атаковать👊', callback_data='attack3_1')
-away3_1 = types.KeyboardButton('Сбежать🏃', callback_data='away3_1')
-battle3_1.add(attack3_1, away3_1)
+wizard_battle3_1 = types.InlineKeyboardMarkup(row_width=2)
+wizard_attack3_1 = types.KeyboardButton('Атаковать👊', callback_data='wizard_attack3_1')
+wizard_away3_1 = types.KeyboardButton('Сбежать🏃', callback_data='wizard_away3_1')
+wizard_battle3_1.add(wizard_attack3_1, wizard_away3_1)
 
 # Основные кнопки 3_2
-battle3_2 = types.InlineKeyboardMarkup(row_width=2)
-attack3_2 = types.KeyboardButton('Атаковать👊', callback_data='attack3_2')
-away3_2 = types.KeyboardButton('Сбежать🏃', callback_data='away3_2')
-battle3_2.add(attack3_2, away3_2)
+wizard_battle3_2 = types.InlineKeyboardMarkup(row_width=2)
+wizard_attack3_2 = types.KeyboardButton('Атаковать👊', callback_data='wizard_attack3_2')
+wizard_away3_2 = types.KeyboardButton('Сбежать🏃', callback_data='wizard_away3_2')
+wizard_battle3_2.add(wizard_attack3_2, wizard_away3_2)
 
 # Основные кнопки 4_1
-battle4_1 = types.InlineKeyboardMarkup(row_width=2)
-attack4_1 = types.KeyboardButton('Атаковать👊', callback_data='attack4_1')
-away4_1 = types.KeyboardButton('Сбежать🏃', callback_data='away4_1')
-battle4_1.add(attack4_1, away4_1)
+wizard_battle4_1 = types.InlineKeyboardMarkup(row_width=2)
+wizard_attack4_1 = types.KeyboardButton('Атаковать👊', callback_data='wizard_attack4_1')
+wizard_away4_1 = types.KeyboardButton('Сбежать🏃', callback_data='wizard_away4_1')
+wizard_battle4_1.add(wizard_attack4_1, wizard_away4_1)
 
 # Основные кнопки 4_2
-battle4_2 = types.InlineKeyboardMarkup(row_width=2)
-attack4_2 = types.KeyboardButton('Атаковать👊', callback_data='attack4_2')
-away4_2 = types.KeyboardButton('Сбежать🏃', callback_data='away4_2')
-battle4_2.add(attack4_2, away4_2)
+wizard_battle4_2 = types.InlineKeyboardMarkup(row_width=2)
+wizard_attack4_2 = types.KeyboardButton('Атаковать👊', callback_data='wizard_attack4_2')
+wizard_away4_2 = types.KeyboardButton('Сбежать🏃', callback_data='wizard_away4_2')
+wizard_battle4_2.add(wizard_attack4_2, wizard_away4_2)
 
 # Основные кнопки 5
-battle5 = types.InlineKeyboardMarkup(row_width=1)
-attack5 = types.KeyboardButton('Атаковать👊', callback_data='attack5')
-battle5.add(attack5)  # будет только кнопка атаки, так как сражение против босса
+wizard_battle5 = types.InlineKeyboardMarkup(row_width=1)
+wizard_attack5 = types.KeyboardButton('Атаковать👊', callback_data='attack5')
+wizard_battle5.add(wizard_attack5)  # будет только кнопка атаки, так как сражение против босса
+
+'''
+ОСНОВНЫЕ КНОПКИ ДЛЯ КАЖДОЙ ДВЕРИ
+РЫЦАРЬ
+'''
+
+# Основные кнопки 1_1
+knight_battle1_1 = types.InlineKeyboardMarkup(row_width=2)
+knight_attack1_1 = types.KeyboardButton('Атаковать👊', callback_data='knight_attack1_1')
+knight_away1_1 = types.KeyboardButton('Сбежать🏃', callback_data='knight_away1_1')
+knight_battle1_1.add(knight_attack1_1, knight_away1_1)
+
+# Основные кнопки 1_2
+knight_battle1_2 = types.InlineKeyboardMarkup(row_width=2)
+knight_attack1_2 = types.KeyboardButton('Атаковать👊', callback_data='knight_attack1_2')
+knight_away1_2 = types.KeyboardButton('Сбежать🏃', callback_data='knight_away1_2')
+knight_battle1_2.add(knight_attack1_2, knight_away1_2)
+
+# Основные кнопки 2_1
+knight_battle2_1 = types.InlineKeyboardMarkup(row_width=2)
+knight_attack2_1 = types.KeyboardButton('Атаковать👊', callback_data='knight_attack2_1')
+knight_away2_1 = types.KeyboardButton('Сбежать🏃', callback_data='knight_away2_1')
+knight_battle2_1.add(knight_attack2_1, knight_away2_1)
+
+# Основные кнопки 2_2
+knight_battle2_2 = types.InlineKeyboardMarkup(row_width=2)
+knight_attack2_2 = types.KeyboardButton('Атаковать👊', callback_data='knight_attack2_2')
+knight_away2_2 = types.KeyboardButton('Сбежать🏃', callback_data='knight_away2_2')
+knight_battle2_2.add(knight_attack2_2, knight_away2_2)
+
+# Основные кнопки 3_1
+knight_battle3_1 = types.InlineKeyboardMarkup(row_width=2)
+knight_attack3_1 = types.KeyboardButton('Атаковать👊', callback_data='knight_attack3_1')
+knight_away3_1 = types.KeyboardButton('Сбежать🏃', callback_data='knight_away3_1')
+knight_battle3_1.add(knight_attack3_1, knight_attack3_1)
+
+# Основные кнопки 3_2
+knight_battle3_2 = types.InlineKeyboardMarkup(row_width=2)
+knight_attack3_2 = types.KeyboardButton('Атаковать👊', callback_data='knight_attack3_2')
+knight_away3_2 = types.KeyboardButton('Сбежать🏃', callback_data='knight_away3_2')
+knight_battle3_2.add(knight_attack3_2, knight_away3_2)
+
+# Основные кнопки 4_1
+knight_battle4_1 = types.InlineKeyboardMarkup(row_width=2)
+knight_attack4_1 = types.KeyboardButton('Атаковать👊', callback_data='knight_attack4_1')
+knight_away4_1 = types.KeyboardButton('Сбежать🏃', callback_data='knight_away4_1')
+knight_battle4_1.add(knight_attack4_1, knight_away4_1)
+
+# Основные кнопки 4_2
+knight_battle4_2 = types.InlineKeyboardMarkup(row_width=2)
+knight_attack4_2 = types.KeyboardButton('Атаковать👊', callback_data='knight_attack4_2')
+knight_away4_2 = types.KeyboardButton('Сбежать🏃', callback_data='knight_away4_2')
+knight_battle4_2.add(knight_attack4_2, knight_away4_2)
+
+# Основные кнопки 5
+knight_battle5 = types.InlineKeyboardMarkup(row_width=1)
+knight_attack5 = types.KeyboardButton('Атаковать👊', callback_data='knight_attack5')
+knight_battle5.add(knight_attack5)  # будет только кнопка атаки, так как сражение против босса
 
 '''
 КНОПКИ ДВЕРЕЙ
+ВОЛШЕБНИК
 '''
 
 # Двери 1 комната
-doors1 = types.InlineKeyboardMarkup(row_width=2)
-door1_1_1 = types.KeyboardButton('Первая дверь🚪', callback_data='door1_1')
-door2_1_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='door1_2')
-doors1.add(door1_1_1, door2_1_2)
+wizard_doors1 = types.InlineKeyboardMarkup(row_width=2)
+wizard_door1_1_1 = types.KeyboardButton('Первая дверь🚪', callback_data='wizard_door1_1')
+wizard_door2_1_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='wizard_door1_2')
+wizard_doors1.add(wizard_door1_1_1, wizard_door2_1_2)
 
 # Двери 2 комната
-doors2 = types.InlineKeyboardMarkup(row_width=2)
-door1_2_1 = types.KeyboardButton('Первая дверь🚪', callback_data='door2_1')
-door2_2_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='door2_2')
-doors2.add(door1_2_1, door2_2_2)
+wizard_doors2 = types.InlineKeyboardMarkup(row_width=2)
+wizard_door1_2_1 = types.KeyboardButton('Первая дверь🚪', callback_data='wizard_door2_1')
+wizard_door2_2_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='wizard_door2_2')
+wizard_doors2.add(wizard_door1_2_1, wizard_door2_2_2)
 
 # Двери 3 комната
-doors3 = types.InlineKeyboardMarkup(row_width=2)
-door1_3_1 = types.KeyboardButton('Первая дверь🚪', callback_data='door3_1')
-door2_3_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='door3_2')
-doors3.add(door1_3_1, door2_3_2)
+wizard_doors3 = types.InlineKeyboardMarkup(row_width=2)
+wizard_door1_3_1 = types.KeyboardButton('Первая дверь🚪', callback_data='wizard_door3_1')
+wizard_door2_3_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='wizard_door3_2')
+wizard_doors3.add(wizard_door1_3_1, wizard_door2_3_2)
 
 # Двери 4 комната
-doors4 = types.InlineKeyboardMarkup(row_width=2)
-door1_4_1 = types.KeyboardButton('Первая дверь🚪', callback_data='door4_1')
-door2_4_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='door4_2')
-doors4.add(door1_4_1, door2_4_2)
+wizard_doors4 = types.InlineKeyboardMarkup(row_width=2)
+wizard_door1_4_1 = types.KeyboardButton('Первая дверь🚪', callback_data='wizard_door4_1')
+wizard_door2_4_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='wizard_door4_2')
+wizard_doors4.add(wizard_door1_4_1, wizard_door2_4_2)
 
 # Двери 5 комната
-doors5 = types.InlineKeyboardMarkup(row_width=2)
-door5 = types.KeyboardButton('Финальная дверь🚪', callback_data='door5')
-doors5.add(door5)
+wizard_doors5 = types.InlineKeyboardMarkup(row_width=2)
+wizard_door5 = types.KeyboardButton('Финальная дверь🚪', callback_data='wizard_door5')
+wizard_doors5.add(wizard_door5)
+
+'''
+КНОПКИ ДВЕРЕЙ
+РЫЦАРЬ
+'''
+
+# Двери 1 комната
+knight_doors1 = types.InlineKeyboardMarkup(row_width=2)
+knight_door1_1_1 = types.KeyboardButton('Первая дверь🚪', callback_data='knight_door1_1')
+knight_door2_1_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='knight_door1_2')
+knight_doors1.add(knight_door1_1_1, knight_door2_1_2)
+
+# Двери 2 комната
+knight_doors2 = types.InlineKeyboardMarkup(row_width=2)
+knight_door1_2_1 = types.KeyboardButton('Первая дверь🚪', callback_data='knight_door2_1')
+knight_door2_2_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='knight_door2_2')
+knight_doors2.add(knight_door1_2_1, knight_door2_2_2)
+
+# Двери 3 комната
+knight_doors3 = types.InlineKeyboardMarkup(row_width=2)
+knight_door1_3_1 = types.KeyboardButton('Первая дверь🚪', callback_data='knight_door3_1')
+knight_door2_3_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='knight_door3_2')
+knight_doors3.add(knight_door1_3_1, knight_door2_3_2)
+
+# Двери 4 комната
+knight_doors4 = types.InlineKeyboardMarkup(row_width=2)
+knight_door1_4_1 = types.KeyboardButton('Первая дверь🚪', callback_data='knight_door4_1')
+knight_door2_4_2 = types.KeyboardButton('Вторая дверь🚪', callback_data='knight_door4_2')
+knight_doors4.add(knight_door1_4_1, knight_door2_4_2)
+
+# Двери 5 комната
+knight_doors5 = types.InlineKeyboardMarkup(row_width=2)
+knight_door5 = types.KeyboardButton('Финальная дверь🚪', callback_data='knight_door5')
+knight_doors5.add(knight_door5)
