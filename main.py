@@ -7,8 +7,8 @@ import config
 import keyboard as kb
 
 # @Dungeon_GameBot
-# bot = Bot(token=config.TOKEN_API)
-bot = Bot(token=config.TOKEN_API, proxy='http://10.0.48.52:3128')
+bot = Bot(token=config.TOKEN_API)
+# bot = Bot(token=config.TOKEN_API, proxy='http://10.0.48.52:3128')
 dp = Dispatcher(bot=bot)
 
 
@@ -129,14 +129,13 @@ async def wizard_room5_delete_buttons(callback_query: types.CallbackQuery):
 
 
 '''
-Функции атаки
+Функции атаки волшебнкиа
 '''
 
 
 # Действия при атаке 1_1
 @dp.callback_query_handler(lambda x: x.data == "wizard_attack1_1")
 async def wizard1_1_attack(callback_query: types.CallbackQuery):
-    print('атака 1-1')
     # Удаление кнопок
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
@@ -148,27 +147,23 @@ async def wizard1_1_attack(callback_query: types.CallbackQuery):
         if config.wizard['hp'] <= 0:  # Проверка жив ли персонаж
             config.spider['hp'] = config.HP_SPIDER
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_DEAD_SPIDER)
-            dp.stop_polling()
             await dp.wait_closed()
-            await bot.close()
             break
         elif config.wizard['hp'] >= 1:
             config.spider['hp'] = config.HP_SPIDER
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SPIDER)
+            # Вывод здоровья
+            await bot.send_message(chat_id=callback_query.from_user.id,
+                                   text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
+            # Создание кнопок второй комнаты
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
+                                   reply_markup=kb.wizard_doors2)
             break
-    # Вывод здоровья
-    await bot.send_message(chat_id=callback_query.from_user.id,
-                           text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
-    # Создание кнопок второй комнаты
-    await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
-                           reply_markup=kb.wizard_doors2)
-    # закончен
 
 
 # Действия при атаке 1_2
 @dp.callback_query_handler(lambda x: x.data == "wizard_attack1_2")
 async def wizard1_2_attack(callback_query: types.CallbackQuery):
-    print('атака 1-2')
     # Удаление кнопок
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
@@ -180,28 +175,25 @@ async def wizard1_2_attack(callback_query: types.CallbackQuery):
         if config.wizard['hp'] <= 0:  # Проверка жив ли персонаж
             config.slime['hp'] = config.HP_SLIME  # Возвращаем здоровье слайму после драки
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_DEAD_SLIME)
-            dp.stop_polling()
             await dp.wait_closed()
-            await bot.close()
             break
         elif config.wizard['hp'] >= 1:
             config.slime['hp'] = config.HP_SLIME
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SLIME)
+
+            # Вывод здоровья
+            await bot.send_message(chat_id=callback_query.from_user.id,
+                                   text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
+            # Создание кнопок второй комнаты
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SLIME,
+                                   reply_markup=kb.wizard_doors2)
             break
-    # Вывод здоровья
-    await bot.send_message(chat_id=callback_query.from_user.id,
-                           text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
-    # Создание кнопок второй комнаты
-    await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SLIME,
-                           reply_markup=kb.wizard_doors2)
-    # закончен
 
 
 # Действия при атаке 2_1
 @dp.callback_query_handler(lambda x: x.data == "wizard_attack2_1")
 async def wizard2_1_attack(callback_query: types.CallbackQuery):
     # Удаление кнопок
-    print('атака 2-1')
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
     while config.wizard['hp'] > 0 and config.slime['hp'] > 0:
@@ -212,27 +204,23 @@ async def wizard2_1_attack(callback_query: types.CallbackQuery):
         if config.wizard['hp'] <= 0:  # Проверка жив ли персонаж
             config.slime['hp'] = config.HP_SLIME  # Возвращаем здоровье слайму после драки
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_DEAD_SLIME)
-            dp.stop_polling()
             await dp.wait_closed()
-            await bot.close()
             break
         elif config.wizard['hp'] >= 1:
             config.slime['hp'] = config.HP_SLIME
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SLIME)
+            # Вывод здоровья
+            await bot.send_message(chat_id=callback_query.from_user.id,
+                                   text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
+            # Создание кнопок второй комнаты
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SLIME,
+                                   reply_markup=kb.wizard_doors3)
             break
-        # Вывод здоровья
-    await bot.send_message(chat_id=callback_query.from_user.id,
-                           text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
-    # Создание кнопок второй комнаты
-    await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SLIME,
-                           reply_markup=kb.wizard_doors3)
-    # закончен
 
 
 # Действия при атаке 2_2
 @dp.callback_query_handler(lambda x: x.data == "wizard_attack2_2")
 async def wizard2_2_attack(callback_query: types.CallbackQuery):
-    print('атака 2-2')
     # Удаление кнопок
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
@@ -244,27 +232,23 @@ async def wizard2_2_attack(callback_query: types.CallbackQuery):
         if config.wizard['hp'] <= 0:  # Проверка жив ли персонаж
             config.skeleton['hp'] = config.HP_SKELETON  # Возвращаем здоровье скелету после драки
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_DEAD_SKELETON)
-            dp.stop_polling()
             await dp.wait_closed()
-            await bot.close()
             break
         elif config.wizard['hp'] >= 1:
             config.skeleton['hp'] = config.HP_SKELETON
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SKELETON)
+            # Вывод здоровья
+            await bot.send_message(chat_id=callback_query.from_user.id,
+                                   text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
+            # Создание кнопок второй комнаты
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SKELETON,
+                                   reply_markup=kb.wizard_doors3)
             break
-        # Вывод здоровья
-    await bot.send_message(chat_id=callback_query.from_user.id,
-                           text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
-    # Создание кнопок второй комнаты
-    await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SKELETON,
-                           reply_markup=kb.wizard_doors3)
-    # закончен
 
 
 # Действия при атаке 3_1
 @dp.callback_query_handler(lambda x: x.data == "wizard_attack3_1")
 async def wizard3_1_attack(callback_query: types.CallbackQuery):
-    print('атака 3-1')
     # Удаление кнопок
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
@@ -276,27 +260,23 @@ async def wizard3_1_attack(callback_query: types.CallbackQuery):
         if config.wizard['hp'] <= 0:  # Проверка жив ли персонаж
             config.golem['hp'] = config.HP_GOLEM  # Возвращаем здоровье голему после драки
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_DEAD_GOLEM)
-            dp.stop_polling()
             await dp.wait_closed()
-            await bot.close()
             break
         elif config.wizard['hp'] >= 1:  # Действия при победе над големом
             config.golem['hp'] = config.HP_GOLEM
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_GOLEM)
+            # Вывод здоровья
+            await bot.send_message(chat_id=callback_query.from_user.id,
+                                   text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
+            # Создание кнопок второй комнаты
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_GOLEM,
+                                   reply_markup=kb.wizard_doors4)
             break
-        # Вывод здоровья
-    await bot.send_message(chat_id=callback_query.from_user.id,
-                           text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
-    # Создание кнопок второй комнаты
-    await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_GOLEM,
-                           reply_markup=kb.wizard_doors4)
-    # закончен
 
 
 # Действия при атаке 3_2
 @dp.callback_query_handler(lambda x: x.data == "wizard_attack3_2")
 async def wizard3_2_attack(callback_query: types.CallbackQuery):
-    print('атака 3-2')
     # Удаление кнопок
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
@@ -308,27 +288,23 @@ async def wizard3_2_attack(callback_query: types.CallbackQuery):
         if config.wizard['hp'] <= 0:  # Проверка жив ли персонаж
             config.spider['hp'] = config.HP_SPIDER
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_DEAD_SPIDER)
-            dp.stop_polling()
             await dp.wait_closed()
-            await bot.close()
             break
         elif config.wizard['hp'] >= 1:
             config.spider['hp'] = config.HP_SPIDER
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SPIDER)
+            # Вывод здоровья
+            await bot.send_message(chat_id=callback_query.from_user.id,
+                                   text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
+            # Создание кнопок второй комнаты
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
+                                   reply_markup=kb.wizard_doors4)
             break
-    # Вывод здоровья
-    await bot.send_message(chat_id=callback_query.from_user.id,
-                           text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
-    # Создание кнопок второй комнаты
-    await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
-                           reply_markup=kb.wizard_doors4)
-    # закончен
 
 
 # Действия при атаке 4_1
 @dp.callback_query_handler(lambda x: x.data == "wizard_attack4_1")
 async def wizard4_1_attack(callback_query: types.CallbackQuery):
-    print('атака 4-1')
     # Удаление кнопок
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
@@ -340,27 +316,23 @@ async def wizard4_1_attack(callback_query: types.CallbackQuery):
         if config.wizard['hp'] <= 0:  # Проверка жив ли персонаж
             config.spider['hp'] = config.HP_SPIDER
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_DEAD_SPIDER)
-            dp.stop_polling()
             await dp.wait_closed()
-            await bot.close()
             break
         elif config.wizard['hp'] >= 1:
             config.spider['hp'] = config.HP_SPIDER
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SPIDER)
+            # Вывод здоровья
+            await bot.send_message(chat_id=callback_query.from_user.id,
+                                   text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
+            # Создание кнопок второй комнаты
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
+                                   reply_markup=kb.wizard_doors5)
             break
-    # Вывод здоровья
-    await bot.send_message(chat_id=callback_query.from_user.id,
-                           text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
-    # Создание кнопок второй комнаты
-    await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
-                           reply_markup=kb.wizard_doors5)
-    # закончен
 
 
 # Действия при атаке 4_2
 @dp.callback_query_handler(lambda x: x.data == "wizard_attack4_2")
 async def wizard4_2_attack(callback_query: types.CallbackQuery):
-    print('атака 4-2')
     # Удаление кнопок
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
@@ -375,21 +347,21 @@ async def wizard4_2_attack(callback_query: types.CallbackQuery):
             break
         elif config.wizard['hp'] >= 1:
             config.skeleton['hp'] = config.HP_SKELETON
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_DEAD_SPIDER)
+            await dp.wait_closed()
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SKELETON)
+            # Вывод здоровья
+            await bot.send_message(chat_id=callback_query.from_user.id,
+                                   text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
+            # Создание кнопок второй комнаты
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SKELETON,
+                                   reply_markup=kb.wizard_doors5)
             break
-        # Вывод здоровья
-    await bot.send_message(chat_id=callback_query.from_user.id,
-                           text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
-    # Создание кнопок второй комнаты
-    await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SKELETON,
-                           reply_markup=kb.wizard_doors5)
-    # закончен
 
 
 # Действия при атаке 5
 @dp.callback_query_handler(lambda x: x.data == "wizard_attack5")
 async def wizard5_attack(callback_query: types.CallbackQuery):
-    print('атака 5')
     # Удаление кнопок
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
@@ -407,18 +379,15 @@ async def wizard5_attack(callback_query: types.CallbackQuery):
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.END_GAME_WIZARD)
             break
 
-    # закончен
-
 
 '''
-Функции побега
+Функции побега волшебника
 '''
 
 
 # Действия при побеге 1_1(переход в 1_2(битва со слаймом))
 @dp.callback_query_handler(lambda x: x.data == "wizard_away1_1")
 async def wizard1_1_away(callback_query: types.CallbackQuery):
-    print('побег 1-1')
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_SPIDER)
     time.sleep(2)
@@ -448,20 +417,18 @@ async def wizard1_1_away(callback_query: types.CallbackQuery):
             elif config.wizard['hp'] >= 1:
                 config.slime['hp'] = config.HP_SLIME
                 await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SLIME)
+                # Вывод здоровья
+                await bot.send_message(chat_id=callback_query.from_user.id,
+                                       text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
+                time.sleep(1)
+                await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SLIME,
+                                       reply_markup=kb.wizard_doors2)
                 break
-        # Вывод здоровья
-        await bot.send_message(chat_id=callback_query.from_user.id,
-                               text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
-        time.sleep(1)
-        await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SLIME,
-                               reply_markup=kb.wizard_doors2)
-        # закончен
 
 
 # Действия при побеге 1_2(переход в 1_1(битва с пауком))
 @dp.callback_query_handler(lambda x: x.data == "wizard_away1_2")
 async def wizard1_2_away(callback_query: types.CallbackQuery):
-    print('побег 1-2')
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_SLIME)
     time.sleep(2)
@@ -491,20 +458,18 @@ async def wizard1_2_away(callback_query: types.CallbackQuery):
             elif config.wizard['hp'] >= 1:
                 config.spider['hp'] = config.HP_SPIDER
                 await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SPIDER)
+                # Вывод здоровья
+                await bot.send_message(chat_id=callback_query.from_user.id,
+                                       text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
+                time.sleep(1)
+                await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
+                                       reply_markup=kb.wizard_doors2)
                 break
-        # Вывод здоровья
-        await bot.send_message(chat_id=callback_query.from_user.id,
-                               text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
-        time.sleep(1)
-        await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
-                               reply_markup=kb.wizard_doors2)
-        # закончен
 
 
 # Действия при побеге 2_1(переход в 2_2(битва со скелетом))
 @dp.callback_query_handler(lambda x: x.data == "wizard_away2_1")
 async def wizard2_1_away(callback_query: types.CallbackQuery):
-    print('побег 2-1')
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_SLIME)
     time.sleep(2)
@@ -534,20 +499,18 @@ async def wizard2_1_away(callback_query: types.CallbackQuery):
             elif config.wizard['hp'] >= 1:
                 config.skeleton['hp'] = config.HP_SKELETON
                 await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SKELETON)
+                # Вывод здоровья
+                await bot.send_message(chat_id=callback_query.from_user.id,
+                                       text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
+                time.sleep(1)
+                await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SKELETON,
+                                       reply_markup=kb.wizard_doors3)
                 break
-        # Вывод здоровья
-        await bot.send_message(chat_id=callback_query.from_user.id,
-                               text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
-        time.sleep(1)
-        await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SKELETON,
-                               reply_markup=kb.wizard_doors3)
-        # закончен
 
 
 # Действия при побеге 2_2(переход в 2_1(битва со слаймом))
 @dp.callback_query_handler(lambda x: x.data == "wizard_away2_2")
 async def wizard2_2_away(callback_query: types.CallbackQuery):
-    print('побег 2-2')
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_SKELETON)
     time.sleep(2)
@@ -577,20 +540,18 @@ async def wizard2_2_away(callback_query: types.CallbackQuery):
             elif config.wizard['hp'] >= 1:
                 config.slime['hp'] = config.HP_SLIME
                 await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SLIME)
+                # Вывод здоровья
+                await bot.send_message(chat_id=callback_query.from_user.id,
+                                       text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
+                time.sleep(1)
+                await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SLIME,
+                                       reply_markup=kb.wizard_doors3)
                 break
-        # Вывод здоровья
-        await bot.send_message(chat_id=callback_query.from_user.id,
-                               text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
-        time.sleep(1)
-        await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SLIME,
-                               reply_markup=kb.wizard_doors3)
-        # закончен
 
 
 # Действия при побеге 3_1(переход в 3_2(битва с пауком))
 @dp.callback_query_handler(lambda x: x.data == "wizard_away3_1")
 async def wizard3_1_away(callback_query: types.CallbackQuery):
-    print('побег 3-1')
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_GOLEM)
     time.sleep(2)
@@ -620,20 +581,18 @@ async def wizard3_1_away(callback_query: types.CallbackQuery):
             elif config.wizard['hp'] >= 1:
                 config.spider['hp'] = config.HP_SPIDER
                 await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SPIDER)
+                # Вывод здоровья
+                await bot.send_message(chat_id=callback_query.from_user.id,
+                                       text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
+                time.sleep(1)
+                await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
+                                       reply_markup=kb.wizard_doors4)
                 break
-        # Вывод здоровья
-        await bot.send_message(chat_id=callback_query.from_user.id,
-                               text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
-        time.sleep(1)
-        await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
-                               reply_markup=kb.wizard_doors4)
-        # закончен
 
 
 # Действия при побеге 3_2(переход в 3_1(битва с големом))
 @dp.callback_query_handler(lambda x: x.data == "wizard_away3_2")
 async def wizard3_2_away(callback_query: types.CallbackQuery):
-    print('побег 3-2')
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_SPIDER)
     time.sleep(2)
@@ -663,20 +622,18 @@ async def wizard3_2_away(callback_query: types.CallbackQuery):
             elif config.wizard['hp'] >= 1:  # Действия при победе над големом
                 config.golem['hp'] = config.HP_GOLEM
                 await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_GOLEM)
+                # Вывод здоровья
+                await bot.send_message(chat_id=callback_query.from_user.id,
+                                       text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
+                time.sleep(1)
+                await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
+                                       reply_markup=kb.wizard_doors4)
                 break
-        # Вывод здоровья
-        await bot.send_message(chat_id=callback_query.from_user.id,
-                               text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
-        time.sleep(1)
-        await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
-                               reply_markup=kb.wizard_doors4)
-        # закончен
 
 
 # Действия при побеге 4_1(переход в 4_2(битва со скелетом))
 @dp.callback_query_handler(lambda x: x.data == "wizard_away4_1")
 async def wizard4_1_away(callback_query: types.CallbackQuery):
-    print('побег 4-1')
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_SPIDER)
     time.sleep(2)
@@ -706,20 +663,18 @@ async def wizard4_1_away(callback_query: types.CallbackQuery):
             elif config.wizard['hp'] >= 1:
                 config.skeleton['hp'] = config.HP_SKELETON
                 await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SKELETON)
+                # Вывод здоровья
+                await bot.send_message(chat_id=callback_query.from_user.id,
+                                       text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
+                time.sleep(1)
+                await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SKELETON,
+                                       reply_markup=kb.wizard_doors5)
                 break
-        # Вывод здоровья
-        await bot.send_message(chat_id=callback_query.from_user.id,
-                               text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
-        time.sleep(1)
-        await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SKELETON,
-                               reply_markup=kb.wizard_doors5)
-        # закончен
 
 
 # Действия при побеге 4_2(переход в 4_1(битва с пауком))
 @dp.callback_query_handler(lambda x: x.data == "wizard_away4_2")
 async def wizard4_2_away(callback_query: types.CallbackQuery):
-    print('побег 4-2')
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_SKELETON)
     time.sleep(2)
@@ -749,14 +704,13 @@ async def wizard4_2_away(callback_query: types.CallbackQuery):
             elif config.wizard['hp'] >= 1:
                 config.spider['hp'] = config.HP_SPIDER
                 await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SPIDER)
+                # Вывод здоровья
+                await bot.send_message(chat_id=callback_query.from_user.id,
+                                       text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
+                time.sleep(1)
+                await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
+                                       reply_markup=kb.wizard_doors5)
                 break
-        # Вывод здоровья
-        await bot.send_message(chat_id=callback_query.from_user.id,
-                               text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
-        time.sleep(1)
-        await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
-                               reply_markup=kb.wizard_doors5)
-        # закончен
 
 
 # РЫЦАРЬ
@@ -769,7 +723,7 @@ async def knight_delete_button(callback_query: types.CallbackQuery):
 
 
 '''
-Функции вывода кнопок РЫЦАРЯ
+Функции вывода кнопок рыцаря
 '''
 
 
@@ -856,14 +810,13 @@ async def wizard_room5_delete_buttons(callback_query: types.CallbackQuery):
 
 
 '''
-Функции атаки
+Функции атаки рыцаря
 '''
 
 
 # Действия при атаке 1_1
 @dp.callback_query_handler(lambda x: x.data == "knight_attack1_1")
 async def knight1_1attack(callback_query: types.CallbackQuery):
-    print('атака 1-1')
     # Удаление кнопок
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
@@ -882,20 +835,18 @@ async def knight1_1attack(callback_query: types.CallbackQuery):
         elif config.knight['hp'] >= 1:
             config.skeleton['hp'] = config.HP_SKELETON
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SKELETON)
+            # Вывод здоровья
+            await bot.send_message(chat_id=callback_query.from_user.id,
+                                   text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
+            # Создание кнопок второй комнаты
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SKELETON,
+                                   reply_markup=kb.knight_doors2)
             break
-        # Вывод здоровья
-    await bot.send_message(chat_id=callback_query.from_user.id,
-                           text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
-    # Создание кнопок второй комнаты
-    await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SKELETON,
-                           reply_markup=kb.knight_doors2)
-    # закончен
 
 
 # Действия при атаке 1_2
 @dp.callback_query_handler(lambda x: x.data == "knight_attack1_2")
 async def knight1_2_attack(callback_query: types.CallbackQuery):
-    print('атака 1-2')
     # Удаление кнопок
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
@@ -914,21 +865,19 @@ async def knight1_2_attack(callback_query: types.CallbackQuery):
         elif config.knight['hp'] >= 1:
             config.spider['hp'] = config.HP_SPIDER
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SPIDER)
+            # Вывод здоровья
+            await bot.send_message(chat_id=callback_query.from_user.id,
+                                   text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
+            # Создание кнопок второй комнаты
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
+                                   reply_markup=kb.knight_doors2)
             break
-    # Вывод здоровья
-    await bot.send_message(chat_id=callback_query.from_user.id,
-                           text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
-    # Создание кнопок второй комнаты
-    await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
-                           reply_markup=kb.knight_doors2)
-    # закончен
 
 
 # Действия при атаке 2_1
 @dp.callback_query_handler(lambda x: x.data == "knight_attack2_1")
 async def knight2_1_attack(callback_query: types.CallbackQuery):
     # Удаление кнопок
-    print('атака 2-1')
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
     while config.knight['hp'] > 0 and config.slime['hp'] > 0:
@@ -946,20 +895,18 @@ async def knight2_1_attack(callback_query: types.CallbackQuery):
         elif config.knight['hp'] >= 1:
             config.slime['hp'] = config.HP_SLIME
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SLIME)
+            # Вывод здоровья
+            await bot.send_message(chat_id=callback_query.from_user.id,
+                                   text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
+            # Создание кнопок второй комнаты
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SLIME,
+                                   reply_markup=kb.knight_doors3)
             break
-        # Вывод здоровья
-    await bot.send_message(chat_id=callback_query.from_user.id,
-                           text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
-    # Создание кнопок второй комнаты
-    await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SLIME,
-                           reply_markup=kb.knight_doors3)
-    # закончен
 
 
 # Действия при атаке 2_2
 @dp.callback_query_handler(lambda x: x.data == "knight_attack2_2")
 async def knight2_2_attack(callback_query: types.CallbackQuery):
-    print('атака 2-2')
     # Удаление кнопок
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
@@ -978,20 +925,18 @@ async def knight2_2_attack(callback_query: types.CallbackQuery):
         elif config.knight['hp'] >= 1:
             config.skeleton['hp'] = config.HP_SKELETON
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SKELETON)
+            # Вывод здоровья
+            await bot.send_message(chat_id=callback_query.from_user.id,
+                                   text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
+            # Создание кнопок второй комнаты
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SKELETON,
+                                   reply_markup=kb.knight_doors3)
             break
-        # Вывод здоровья
-    await bot.send_message(chat_id=callback_query.from_user.id,
-                           text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
-    # Создание кнопок второй комнаты
-    await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SKELETON,
-                           reply_markup=kb.knight_doors3)
-    # закончен
 
 
 # Действия при атаке 3_1
 @dp.callback_query_handler(lambda x: x.data == "knight_attack3_1")
 async def knight3_1_attack(callback_query: types.CallbackQuery):
-    print('атака 3-1')
     # Удаление кнопок
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
@@ -1010,20 +955,18 @@ async def knight3_1_attack(callback_query: types.CallbackQuery):
         elif config.knight['hp'] >= 1:  # Действия при победе над големом
             config.golem['hp'] = config.HP_GOLEM
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_GOLEM)
+            # Вывод здоровья
+            await bot.send_message(chat_id=callback_query.from_user.id,
+                                   text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
+            # Создание кнопок второй комнаты
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_GOLEM,
+                                   reply_markup=kb.knight_doors4)
             break
-        # Вывод здоровья
-    await bot.send_message(chat_id=callback_query.from_user.id,
-                           text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
-    # Создание кнопок второй комнаты
-    await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_GOLEM,
-                           reply_markup=kb.knight_doors4)
-    # закончен
 
 
 # Действия при атаке 3_2
 @dp.callback_query_handler(lambda x: x.data == "knight_attack3_2")
 async def knight3_2_attack(callback_query: types.CallbackQuery):
-    print('атака 3-2')
     # Удаление кнопок
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
@@ -1042,21 +985,19 @@ async def knight3_2_attack(callback_query: types.CallbackQuery):
         elif config.knight['hp'] >= 1:
             config.spider['hp'] = config.HP_SPIDER
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SPIDER)
+            # Вывод здоровья
+            await bot.send_message(chat_id=callback_query.from_user.id,
+                                   text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
+            # Создание кнопок второй комнаты
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
+                                   reply_markup=kb.knight_doors4)
             break
-    # Вывод здоровья
-    await bot.send_message(chat_id=callback_query.from_user.id,
-                           text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
-    # Создание кнопок второй комнаты
-    await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
-                           reply_markup=kb.knight_doors4)
-    # закончен
 
 
 # Действия при атаке 4_1
 @dp.callback_query_handler(lambda x: x.data == "knight_attack4_1")
 async def knight4_1_attack(callback_query: types.CallbackQuery):
     # Удаление кнопок
-    print('атака 4-1')
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
     while config.knight['hp'] > 0 and config.slime['hp'] > 0:
@@ -1074,20 +1015,18 @@ async def knight4_1_attack(callback_query: types.CallbackQuery):
         elif config.knight['hp'] >= 1:
             config.slime['hp'] = config.HP_SLIME
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SLIME)
+            # Вывод здоровья
+            await bot.send_message(chat_id=callback_query.from_user.id,
+                                   text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
+            # Создание кнопок второй комнаты
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SLIME,
+                                   reply_markup=kb.knight_doors5)
             break
-        # Вывод здоровья
-    await bot.send_message(chat_id=callback_query.from_user.id,
-                           text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
-    # Создание кнопок второй комнаты
-    await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SLIME,
-                           reply_markup=kb.knight_doors5)
-    # закончен
 
 
 # Действия при атаке 4_2
 @dp.callback_query_handler(lambda x: x.data == "knight_attack4_2")
 async def knight3_1_attack(callback_query: types.CallbackQuery):
-    print('атака 4-2')
     # Удаление кнопок
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
@@ -1106,20 +1045,18 @@ async def knight3_1_attack(callback_query: types.CallbackQuery):
         elif config.knight['hp'] >= 1:  # Действия при победе над големом
             config.golem['hp'] = config.HP_GOLEM
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_GOLEM)
+            # Вывод здоровья
+            await bot.send_message(chat_id=callback_query.from_user.id,
+                                   text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
+            # Создание кнопок второй комнаты
+            await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_GOLEM,
+                                   reply_markup=kb.knight_doors4)
             break
-        # Вывод здоровья
-    await bot.send_message(chat_id=callback_query.from_user.id,
-                           text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
-    # Создание кнопок второй комнаты
-    await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_GOLEM,
-                           reply_markup=kb.knight_doors4)
-    # закончен
 
 
 # Действия при атаке 5
 @dp.callback_query_handler(lambda x: x.data == "knight_attack5")
 async def knight5_attack(callback_query: types.CallbackQuery):
-    print('атака 5')
     # Удаление кнопок
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     # Цикл атаки
@@ -1137,18 +1074,15 @@ async def knight5_attack(callback_query: types.CallbackQuery):
             await bot.send_message(chat_id=callback_query.from_user.id, text=config.END_GAME_KNIGHT)
             break
 
-    # закончен
-
 
 '''
-Функции побега
+Функции побега рыцаря
 '''
 
 
 # Действия при побеге 1_1(переход в 1_2(битва с пауком))
 @dp.callback_query_handler(lambda x: x.data == "knight_away1_1")
 async def knight1_1_away(callback_query: types.CallbackQuery):
-    print('побег 1-1')
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_SKELETON)
     time.sleep(2)
@@ -1178,20 +1112,18 @@ async def knight1_1_away(callback_query: types.CallbackQuery):
             elif config.knight['hp'] >= 1:
                 config.spider['hp'] = config.HP_SPIDER
                 await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SPIDER)
+                # Вывод здоровья
+                await bot.send_message(chat_id=callback_query.from_user.id,
+                                       text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
+                time.sleep(1)
+                await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
+                                       reply_markup=kb.knight_doors2)
                 break
-        # Вывод здоровья
-        await bot.send_message(chat_id=callback_query.from_user.id,
-                               text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
-        time.sleep(1)
-        await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
-                               reply_markup=kb.knight_doors2)
-        # закончен
 
 
 # Действия при побеге 1_2(переход в 1_1(битва со скелетом))
 @dp.callback_query_handler(lambda x: x.data == "knight_away1_2")
 async def knight_1_2_away(callback_query: types.CallbackQuery):
-    print('побег 1-2')
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_SPIDER)
     time.sleep(2)
@@ -1221,19 +1153,18 @@ async def knight_1_2_away(callback_query: types.CallbackQuery):
             elif config.knight['hp'] >= 1:
                 config.skeleton['hp'] = config.HP_SKELETON
                 await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SKELETON)
+                # Вывод здоровья
+                await bot.send_message(chat_id=callback_query.from_user.id,
+                                       text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
+                time.sleep(1)
+                await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SKELETON,
+                                       reply_markup=kb.knight_doors2)
                 break
-        # Вывод здоровья
-        await bot.send_message(chat_id=callback_query.from_user.id,
-                               text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
-        time.sleep(1)
-        await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SKELETON,
-                               reply_markup=kb.knight_doors2)
-        # закончен
+
 
 # Действия при побеге 2_1(переход в 2_2(битва со скелетом))
 @dp.callback_query_handler(lambda x: x.data == "knight_away2_1")
 async def knight2_1_away(callback_query: types.CallbackQuery):
-    print('побег 2-1')
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_SLIME)
     time.sleep(2)
@@ -1263,20 +1194,18 @@ async def knight2_1_away(callback_query: types.CallbackQuery):
             elif config.knight['hp'] >= 1:
                 config.skeleton['hp'] = config.HP_SKELETON
                 await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SKELETON)
+                # Вывод здоровья
+                await bot.send_message(chat_id=callback_query.from_user.id,
+                                       text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
+                time.sleep(1)
+                await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SKELETON,
+                                       reply_markup=kb.knight_doors3)
                 break
-        # Вывод здоровья
-        await bot.send_message(chat_id=callback_query.from_user.id,
-                               text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
-        time.sleep(1)
-        await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SKELETON,
-                               reply_markup=kb.knight_doors3)
-        # закончен
 
 
 # Действия при побеге 2_2(переход в 2_1(битва со слаймом))
 @dp.callback_query_handler(lambda x: x.data == "knight_away2_2")
 async def knight2_2_away(callback_query: types.CallbackQuery):
-    print('побег 2-2')
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_SKELETON)
     time.sleep(2)
@@ -1306,20 +1235,18 @@ async def knight2_2_away(callback_query: types.CallbackQuery):
             elif config.knight['hp'] >= 1:
                 config.slime['hp'] = config.HP_SLIME
                 await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SLIME)
+                # Вывод здоровья
+                await bot.send_message(chat_id=callback_query.from_user.id,
+                                       text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
+                time.sleep(1)
+                await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SLIME,
+                                       reply_markup=kb.knight_doors3)
                 break
-        # Вывод здоровья
-        await bot.send_message(chat_id=callback_query.from_user.id,
-                               text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
-        time.sleep(1)
-        await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SLIME,
-                               reply_markup=kb.knight_doors3)
-        # закончен
 
 
 # Действия при побеге 3_1(переход в 3_2(битва с пауком))
 @dp.callback_query_handler(lambda x: x.data == "wizard_away3_1")
 async def wizard3_1_away(callback_query: types.CallbackQuery):
-    print('побег 3-1')
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_GOLEM)
     time.sleep(2)
@@ -1349,20 +1276,18 @@ async def wizard3_1_away(callback_query: types.CallbackQuery):
             elif config.wizard['hp'] >= 1:
                 config.spider['hp'] = config.HP_SPIDER
                 await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SPIDER)
+                # Вывод здоровья
+                await bot.send_message(chat_id=callback_query.from_user.id,
+                                       text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
+                time.sleep(1)
+                await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
+                                       reply_markup=kb.wizard_doors4)
                 break
-        # Вывод здоровья
-        await bot.send_message(chat_id=callback_query.from_user.id,
-                               text=config.AFTER_FIGHT_HP + str(config.wizard['hp']))
-        time.sleep(1)
-        await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SPIDER,
-                               reply_markup=kb.wizard_doors4)
-        # закончен
 
 
 # Действия при побеге 3_2(переход в 3_1(битва с големом))
 @dp.callback_query_handler(lambda x: x.data == "knight_away3_2")
 async def knight3_2_away(callback_query: types.CallbackQuery):
-    print('побег 3-2')
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_SPIDER)
     time.sleep(2)
@@ -1392,20 +1317,18 @@ async def knight3_2_away(callback_query: types.CallbackQuery):
             elif config.knight['hp'] >= 1:  # Действия при победе над големом
                 config.golem['hp'] = config.HP_GOLEM
                 await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_GOLEM)
+                # Вывод здоровья
+                await bot.send_message(chat_id=callback_query.from_user.id,
+                                       text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
+                time.sleep(1)
+                await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_GOLEM,
+                                       reply_markup=kb.knight_doors4)
                 break
-        # Вывод здоровья
-        await bot.send_message(chat_id=callback_query.from_user.id,
-                               text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
-        time.sleep(1)
-        await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_GOLEM,
-                               reply_markup=kb.knight_doors4)
-        # закончен
 
 
 # Действия при побеге 4_1(переход в 4_2(битва с големом))
 @dp.callback_query_handler(lambda x: x.data == "knight_away4_1")
 async def knight4_1_away(callback_query: types.CallbackQuery):
-    print('побег 4-1')
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_SLIME)
     time.sleep(2)
@@ -1435,20 +1358,18 @@ async def knight4_1_away(callback_query: types.CallbackQuery):
             elif config.knight['hp'] >= 1:  # Действия при победе над големом
                 config.golem['hp'] = config.HP_GOLEM
                 await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_GOLEM)
+                # Вывод здоровья
+                await bot.send_message(chat_id=callback_query.from_user.id,
+                                       text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
+                time.sleep(1)
+                await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_GOLEM,
+                                       reply_markup=kb.knight_doors5)
                 break
-        # Вывод здоровья
-        await bot.send_message(chat_id=callback_query.from_user.id,
-                               text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
-        time.sleep(1)
-        await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_GOLEM,
-                               reply_markup=kb.knight_doors5)
-        # закончен
 
 
 # Действия при побеге 4_2(переход в 4_1(битва со слаймом))
 @dp.callback_query_handler(lambda x: x.data == "knight_away4_2")
 async def knight4_2_away(callback_query: types.CallbackQuery):
-    print('побег 4-2')
     await bot.edit_message_reply_markup(callback_query.from_user.id, callback_query.message.message_id, None, None)
     await bot.send_message(chat_id=callback_query.from_user.id, text=config.AWAY_TEXT_GOLEM)
     time.sleep(2)
@@ -1478,13 +1399,14 @@ async def knight4_2_away(callback_query: types.CallbackQuery):
             elif config.knight['hp'] >= 1:
                 config.slime['hp'] = config.HP_SLIME
                 await bot.send_message(chat_id=callback_query.from_user.id, text=config.YOU_WIN_SLIME)
+                # Вывод здоровья
+                await bot.send_message(chat_id=callback_query.from_user.id,
+                                       text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
+                time.sleep(1)
+                await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SLIME,
+                                       reply_markup=kb.knight_doors5)
                 break
-        # Вывод здоровья
-        await bot.send_message(chat_id=callback_query.from_user.id,
-                               text=config.AFTER_FIGHT_HP + str(config.knight['hp']))
-        time.sleep(1)
-        await bot.send_message(chat_id=callback_query.from_user.id, text=config.ROOM_SLIME,
-                               reply_markup=kb.knight_doors5)
+
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)

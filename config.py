@@ -1,4 +1,5 @@
 TOKEN_API = "6598630985:AAH6hm8idDR8J4SxkhljfEzBoYnKE4Q4X4s"
+# tg: @Dungeon_GameBot
 
 # Характеристика персонажей
 wizard = dict(name='Волшебник', pw=60, hp=55)
@@ -14,15 +15,17 @@ golem = dict(name='Голем', pw=45, hp=65)
 demon = dict(name='Демон', pw=75, hp=85)  # Босс для Волшебника
 dragon = dict(name='Дракон', pw=55, hp=90)  # Босс для Рыцаря
 
-# Здоровье
+# Здоровье персонажей
 HP_KNIGHT = 70
 HP_WIZARD = 55
 
+# Здоровье монстров
 HP_SLIME = 30
 HP_SPIDER = 40
 HP_SKELETON = 60
 HP_GOLEM = 65
 
+# Здоровье боссов
 HP_DEMON = 85
 HP_DRAGON = 90
 
@@ -32,9 +35,11 @@ START_TEXT = '''
 Желаю тебе удачи пройти её!
 '''
 
-# Текст кнопки информация (написать)
+# Текст информации
 INFORMATION_TEXT = ''' 
-ТУТ БУДЕТ ТЕКСТ ПРО БОТА И ОПИСАНИЕ ИГРЫ
+Dungeon Game - это телеграм-игра в жанре RPG. 
+Здесь вам придется сразиться с монстрами, чтобы в
+финальной битве с боссом одержать победу.
 '''
 
 START_GAME_TEXT = f'''

@@ -4,7 +4,7 @@ from aiogram import types
 keyb = types.ReplyKeyboardMarkup(resize_keyboard=True)
 info_button = types.KeyboardButton('Информацияℹ️')
 start_game = types.KeyboardButton('Начать игру🎮')
-keyb.add(info_button, start_game)
+keyb.add(start_game, info_button)
 
 # Кнопки персонажей
 persons_button = types.InlineKeyboardMarkup(row_width=2)
@@ -67,7 +67,7 @@ wizard_battle4_2.add(wizard_attack4_2, wizard_away4_2)
 
 # Основные кнопки 5
 wizard_battle5 = types.InlineKeyboardMarkup(row_width=1)
-wizard_attack5 = types.KeyboardButton('Атаковать👊', callback_data='attack5')
+wizard_attack5 = types.KeyboardButton('Атаковать👊', callback_data='wizard_attack5')
 wizard_battle5.add(wizard_attack5)  # будет только кнопка атаки, так как сражение против босса
 
 '''
