@@ -103,7 +103,7 @@ knight_battle2_2.add(knight_attack2_2, knight_away2_2)
 knight_battle3_1 = types.InlineKeyboardMarkup(row_width=2)
 knight_attack3_1 = types.KeyboardButton('Атаковать👊', callback_data='knight_attack3_1')
 knight_away3_1 = types.KeyboardButton('Сбежать🏃', callback_data='knight_away3_1')
-knight_battle3_1.add(knight_attack3_1, knight_attack3_1)
+knight_battle3_1.add(knight_attack3_1, knight_away3_1)
 
 # Основные кнопки 3_2
 knight_battle3_2 = types.InlineKeyboardMarkup(row_width=2)
